@@ -1,3 +1,24 @@
 <link rel="icon" href="{{ '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
 <meta name="theme-color" content="#2456ce">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var nav = document.getElementById("site-nav");
+    if (!nav) return;
+    function update() {
+      var max = nav.scrollHeight - nav.clientHeight;
+      nav.classList.toggle("nav-fade-top", nav.scrollTop > 1);
+      nav.classList.toggle("nav-fade-bottom", max - nav.scrollTop > 1);
+    }
+    nav.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    if (window.ResizeObserver) {
+      var observer = new ResizeObserver(update);
+      observer.observe(nav);
+      Array.prototype.forEach.call(nav.children, function (child) {
+        observer.observe(child);
+      });
+    }
+    update();
+  });
+</script>

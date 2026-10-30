@@ -56,6 +56,28 @@ input:focus-visible {
   padding: 0 22px 24px;
 }
 
+@media (min-width: 960px) {
+  .site-nav {
+    --nav-fade-top: 0px;
+    --nav-fade-bottom: 0px;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--nav-fade-top), #000 calc(100% - var(--nav-fade-bottom)), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 var(--nav-fade-top), #000 calc(100% - var(--nav-fade-bottom)), transparent 100%);
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav.nav-fade-top {
+    --nav-fade-top: 32px;
+  }
+
+  .site-nav.nav-fade-bottom {
+    --nav-fade-bottom: 48px;
+  }
+}
+
 .site-nav .nav-list .nav-list-item {
   margin-bottom: 5px;
   font-size: 14px;
@@ -83,14 +105,19 @@ input:focus-visible {
 }
 
 .site-nav .nav-list .nav-list-item > .nav-list-expander {
-  width: 40px;
-  height: 44px;
-  padding: 12px;
-  border-radius: 8px;
+  top: 1px;
+  right: 1px;
+  width: 39px;
+  height: 42px;
+  padding: 11px 12px;
+  border-radius: 0 7px 7px 0;
+  background: transparent;
+  background-image: none;
 }
 
 .site-nav .nav-list .nav-list-item > .nav-list-expander:hover {
   background: $feedback-color;
+  background-image: none;
 }
 
 .site-nav .nav-list .nav-list-item > .nav-list {

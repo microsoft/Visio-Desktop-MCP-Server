@@ -34,21 +34,17 @@ input:focus-visible {
 .site-title {
   gap: 12px;
   padding: 24px 22px;
-  font-size: 19px !important;
-  font-weight: 650;
+  font-size: 18px !important;
+  font-weight: 600;
   line-height: 1.25;
+  white-space: nowrap;
 }
 
 .site-title::before {
-  display: grid;
-  flex: 0 0 38px;
-  place-items: center;
-  height: 38px;
-  color: $body-background-color;
-  background: $link-color;
-  border-radius: 10px;
-  font-size: 23px;
-  content: "V";
+  flex: 0 0 32px;
+  height: 32px;
+  background: url("../images/favicon.svg") center / contain no-repeat;
+  content: "";
 }
 
 .site-title:hover,

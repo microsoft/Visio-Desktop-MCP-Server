@@ -5,7 +5,7 @@ permalink: /support/
 ---
 # Help and feedback
 
-Your feedback helps shape Visio Desktop MCP. To ask a question, report a bug,
+Your feedback helps shape Visio Desktop MCP Server. To ask a question, report a bug,
 or suggest a feature, open an issue in
 [GitHub Issues](https://github.com/microsoft/Visio-Desktop-MCP-Server/issues).
 Before you open a new issue, search the existing issues to see whether someone

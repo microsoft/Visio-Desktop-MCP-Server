@@ -3,7 +3,7 @@ title: Overview
 nav_order: 1
 permalink: /
 ---
-# Visio Desktop MCP
+# Visio Desktop MCP Server
 
 Create, inspect, and update **native, editable Visio diagrams** from an
 MCP-compatible AI client. The client interprets your request and supplies the
@@ -36,21 +36,57 @@ license terms included with the package.
 ## Know the boundaries
 
 The server requires the installed Windows desktop app; it doesn't operate
-Visio for the web or provide headless cloud automation. The AI client reads
-your source files; the server isn't a general-purpose spreadsheet or CSV
-importer. Only the capabilities exposed by its tools are available.
+Visio for the web, run on macOS, or provide headless cloud automation. The
+AI client reads your source files; the server doesn't import CSV, JSON, or
+Excel files itself. Only the capabilities exposed by its tools are available;
+some tasks may still need to be done directly in Visio.
 
 Results depend on your model, installed content, and drawing complexity.
 Review source fidelity and appearance in Visio before relying on a drawing.
 Local automation also doesn't mean model processing stays on your device:
 read [Privacy and control](PRIVACY.md) before using sensitive content.
 
+Also expect these preview limitations:
+
+- **Output varies:** results can differ between models and between runs of
+  the same prompt.
+- **Layout needs review:** spacing, alignment, connector routing, and text
+  placement may need manual adjustment.
+- **Large drawings:** large or highly connected diagrams may need several
+  scoped operations and extra review. A partial answer about a large drawing
+  doesn't mean the rest of it is empty.
+- **Existing diagrams:** scope changes narrowly and verify that unrelated
+  content was preserved.
+- **Layout check:** it finds visual problems only. It doesn't fix them or
+  confirm that the content is correct, and skipped items haven't been
+  checked. See [Validate and export](VALIDATE_AND_EXPORT.md).
+- **Custom and smart shapes:** shapes that rely on macros, add-ins, protected
+  cells, or other shape logic may not behave as in manual use. See
+  [Test before standardizing](CUSTOM_SHAPES.md#test-before-standardizing).
+- **Legacy stencils:** `.vss` and `.vst` files don't expose indexed masters;
+  use a modern-format copy. See [Discover and bind masters](CUSTOM_SHAPES.md#discover-and-bind-masters).
+- **Saving:** changes aren't saved automatically, exporting doesn't save the
+  drawing, closing discards unsaved changes, and an export can replace an
+  earlier export with the same name. Don't edit the same diagram yourself,
+  open another copy of it, or let more than one agent work on it at the same
+  time. See [Manage pages and save](WORK_WITH_DIAGRAMS.md#manage-pages-and-save).
+- **Interactive session:** run the AI client, the server, and Visio in the
+  same signed-in Windows session, even when Visio runs hidden. There's no
+  hosted version, and the server isn't designed to run as an unattended
+  Windows service. Don't start it in WSL, a development container, an SSH
+  session, or a cloud workspace.
+  See [Prerequisites](SETUP.md#prerequisites).
+- **Client compatibility:** not every AI client or version has been tested
+  with this preview. A local MCP configuration doesn't override your
+  organization's restrictions on AI clients, MCP servers, or tools.
+
 ### Add-ins and Automation events
 
 During automation, the server turns off Visio's
 `Application.EventsEnabled` setting so add-ins can't change a drawing
-unexpectedly. Add-ins, macros, and some built-in drawing features depend on
-these events. The setting applies to the whole Visio instance, not one
+unexpectedly. Some container and swimlane changes turn events on briefly.
+Add-ins, macros, and some built-in drawing features depend on these events
+and might not run or update the diagram as they do when you edit it yourself. The setting applies to the whole Visio instance, not one
 document: it stays off after an MCP call, and closing a drawing doesn't reset
 it.
 

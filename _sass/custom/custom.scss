@@ -3,10 +3,11 @@ $visio-muted: #526179 !default;
 $visio-inline-code: #edf1f7 !default;
 $visio-warning-background: #fff8e6 !default;
 $visio-warning-border: #b86e00 !default;
+$visio-warning-text: #17243a !default;
 $code-linenumber-color: #e5edff !default;
 
 html {
-  color-scheme: light;
+  color-scheme: $color-scheme;
 }
 
 a {
@@ -150,6 +151,37 @@ input:focus-visible {
   padding-right: 0;
 }
 
+.theme-toggle {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 12px;
+  padding: 0;
+  color: $visio-muted;
+  background: transparent;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: $link-color;
+  background: $feedback-color;
+}
+
+.theme-toggle-sun,
+[data-theme="dark"] .theme-toggle-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle-sun {
+  display: block;
+}
+
 .main-content-wrap {
   padding: 32px 22px;
 }
@@ -179,7 +211,7 @@ input:focus-visible {
   .preview-notice {
     margin: 24px 0;
     padding: 16px 20px;
-    color: #17243a;
+    color: $visio-warning-text;
     background: $visio-warning-background;
     border: 1px solid $visio-warning-border;
     border-left-width: 4px;

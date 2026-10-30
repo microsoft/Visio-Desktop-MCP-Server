@@ -2,6 +2,72 @@
 <link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
 <meta name="theme-color" content="#2456ce">
 <script>
+  (function () {
+    var storageKey = "visio-docs-theme";
+    var darkId = "visio-dark-stylesheet";
+    var darkHref = "{{ '/assets/css/just-the-docs-visio-dark.css' | relative_url }}";
+    var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+    function stored() {
+      try { return localStorage.getItem(storageKey); } catch (e) { return null; }
+    }
+
+    function preferred() {
+      var theme = stored();
+      if (theme === "dark" || theme === "light") return theme;
+      return media && media.matches ? "dark" : "light";
+    }
+
+    function apply(theme) {
+      var dark = theme === "dark";
+      var darkLink = document.getElementById(darkId);
+      if (!darkLink && dark && document.readyState !== "loading") {
+        darkLink = document.createElement("link");
+        darkLink.rel = "stylesheet";
+        darkLink.id = darkId;
+        darkLink.href = darkHref;
+        document.head.appendChild(darkLink);
+      }
+      if (darkLink) darkLink.disabled = !dark;
+      document.documentElement.style.backgroundColor = dark ? "#0f1724" : "";
+      document.documentElement.style.colorScheme = dark ? "dark" : "";
+      document.documentElement.setAttribute("data-theme", theme);
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", theme === "dark" ? "#0f1724" : "#2456ce");
+      var button = document.getElementById("theme-toggle");
+      if (button) {
+        var label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+        button.setAttribute("aria-label", label);
+        button.setAttribute("title", label);
+        button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+      }
+    }
+
+    // A parser-inserted stylesheet blocks first paint; swapping href from script does not.
+    if (preferred() === "dark") {
+      document.write('<link rel="stylesheet" id="' + darkId + '" href="' + darkHref + '">');
+    }
+    apply(preferred());
+
+    if (media) {
+      var onChange = function () { if (!stored()) apply(preferred()); };
+      if (media.addEventListener) media.addEventListener("change", onChange);
+      else if (media.addListener) media.addListener(onChange);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var button = document.getElementById("theme-toggle");
+      if (!button) return;
+      apply(preferred());
+      button.addEventListener("click", function () {
+        var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        try { localStorage.setItem(storageKey, next); } catch (e) {}
+        apply(next);
+      });
+    });
+  })();
+</script>
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     var nav = document.getElementById("site-nav");
     if (!nav) return;

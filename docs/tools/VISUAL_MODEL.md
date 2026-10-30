@@ -21,6 +21,7 @@ Use canonical casing below, not read-output field names or old aliases.
 | `Layers` | Optional array: required `name`, optional boolean `visible`/`print`/`locked`, string `color` |
 | `Metadata` | Optional `Title`, `Author`, `Description`, `VisioVersion`, `CreatedUtc`, `ModifiedUtc`, `Extensions`; timestamps are date-time strings, not proof every field changes a native property |
 | `Extensions` | Preserved JSON passthrough; not an executable capability |
+{: .field-table }
 
 Shapes require unique nonempty `ID` and real `NameU` from
 [content_search](CONTENT_SEARCH.md). Optional fields:

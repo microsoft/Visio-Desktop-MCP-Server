@@ -40,6 +40,26 @@ response to a failed tool call.
 | Missing or unexpected content | Read and compare against the complete source. [Validation](VALIDATE_AND_EXPORT.md) checks visual defects, not process completeness. |
 | Partial large-diagram answer | Narrow the read or retrieve all [issued chunks](TOOLS.md#read-results). Omitted nested fields aren't proof of absence. |
 | Edit fails midway | Inspect what changed before requesting a smaller correction. A successful response can still contain operation failures. |
+| Add-ins or macros don't run | Visio events may be turned off. See [Add-ins and macros don't run](#add-ins-and-macros-dont-run). |
+
+## Add-ins and macros don't run
+
+During automation, the server turns off Visio's `Application.EventsEnabled`
+setting so add-ins can't change a drawing unexpectedly. Some container and
+swimlane changes turn events on briefly. Add-ins, macros, and some built-in
+drawing features depend on these events and might not run or update the
+diagram as they do when you edit it yourself.
+
+The setting applies to the whole Visio instance, not one document: it stays
+off after an MCP call, and closing a drawing doesn't reset it. To turn events
+back on after you finish MCP work:
+
+1. Stop the MCP server.
+2. In Visio, go to **File > Options > Advanced**.
+3. Under **General**, select **Enable Automation Events**, and then select **OK**.
+
+Using MCP again can turn events off again. You don't need to disable your
+add-ins.
 
 ## Collect diagnostics
 

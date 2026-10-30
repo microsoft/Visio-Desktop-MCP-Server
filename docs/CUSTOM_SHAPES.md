@@ -1,7 +1,7 @@
 ---
-title: Custom shapes
+title: Work with Custom Content
 nav_order: 7
-permalink: /custom-shapes/
+permalink: /custom-content/
 ---
 # Use your organization's shapes
 
@@ -11,14 +11,17 @@ starting drawing.
 
 ## Make content discoverable
 
-Place approved files in a known Visio content location:
+Place approved files in a location registered in Visio:
 
-| Content | Discovery locations |
+| Location | Set in Visio |
 | --- | --- |
-| Stencils | Visio's My Shapes and registered Stencils locations, and the conventional `%USERPROFILE%\Documents\My Shapes` folder |
-| Templates | Visio's registered Templates locations and `%APPDATA%\Microsoft\Templates` |
+| My Shapes | **File Locations > My Shapes** |
+| Stencils | **File Locations > Stencils** |
+| Templates | **File Locations > Templates** |
 
-Registered Stencils and Templates locations include their subfolders. The
+The server finds both stencils and templates in any of these locations,
+including their subfolders. Folders that aren't registered in Visio, such as
+`%APPDATA%\Microsoft\Templates`, aren't searched unless you add them. The
 simplest option is to put stencil files in the folder shown under **My Shapes**,
 which needs no further configuration. To check or add other folders in Visio:
 

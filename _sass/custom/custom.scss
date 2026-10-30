@@ -285,6 +285,22 @@ input:focus-visible {
   tr:last-child td {
     border-bottom: 0;
   }
+
+  .field-table th:first-child,
+  .field-table td:first-child {
+    width: 11rem;
+    white-space: nowrap;
+  }
+
+  .settings-table th:first-child,
+  .settings-table td:first-child {
+    white-space: nowrap;
+  }
+
+  .settings-table th:nth-child(2),
+  .settings-table td:nth-child(2) {
+    white-space: nowrap;
+  }
 }
 
 .main-content [id] {

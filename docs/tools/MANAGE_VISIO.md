@@ -35,8 +35,7 @@ It bypasses the [automatic refresh freshness gate](../configuration/RUNTIME.md#i
 It doesn't import/copy files or update shapes already placed in drawings.
 Check `failedStencilCount`: completion doesn't mean every source was readable.
 `persisted=false` means the refreshed snapshot is in memory but wasn't written
-to the persistent cache, for example when caching is disabled or another writer
-owns the cache lock.
+to the persistent cache, for example when another writer owns the cache lock.
 
 ## Examples
 

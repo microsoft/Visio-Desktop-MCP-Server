@@ -13,8 +13,13 @@ retained drawing IDs belong to the previous session.
 
 | Reference | Contents |
 | --- | --- |
-| [Runtime and discovery](configuration/RUNTIME.md) | Output root, visibility, locale, caches, usage ranking, index freshness, master resolution, response format |
-| [Logging and diagnostics](configuration/LOGGING.md) | Levels, file logging, retention, argument limits, locations, telemetry distinction |
+| [Runtime and discovery](configuration/RUNTIME.md) | Output root, visibility, index refresh, custom-content locations |
+| [Logging and diagnostics](configuration/LOGGING.md) | File logging, log rollover, locations, telemetry distinction |
+
+The server reads three user-facing settings: `VISIO_MCP_ROOT`,
+`VISIO_MCP_VISIBLE`, and `VISIO_MCP_LOG_FILE`. Other `VISIO_MCP_*` variables
+from earlier previews, such as log level, log retention, locale, caching, and
+index refresh overrides, are ignored; remove them from your configuration.
 
 Tool arguments such as `options.autoLayout`, export `dpi`, and `overwrite`
 are per-request settings, **not environment variables**. Find them in the
@@ -37,9 +42,7 @@ inside every client's JSON environment values.
       "env": {
         "VISIO_MCP_ROOT": "C:\\VisioOutput",
         "VISIO_MCP_VISIBLE": "true",
-        "VISIO_MCP_LOG_LEVEL": "Information",
-        "VISIO_MCP_LOG_FILE": "true",
-        "VISIO_MCP_LOG_RETENTION_DAYS": "14"
+        "VISIO_MCP_LOG_FILE": "true"
       }
     }
   }
@@ -64,9 +67,10 @@ Logs, stencil snapshots, and the search database live under the fixed
 See [exact paths and logging controls](configuration/LOGGING.md).
 Changing output folders doesn't relocate these files.
 
-Boolean parsing isn't uniform. For example, `VISIO_MCP_CACHE_DISABLED=1`
-doesn't disable caching; use `true`. Read accepted values before changing a
-setting, and remove an override to restore its default.
+Boolean parsing isn't uniform. `VISIO_MCP_VISIBLE` shows Visio only for `1`,
+`true`, `yes`, or `on`, while `VISIO_MCP_LOG_FILE` turns off disk logging only
+for `0`, `false`, or `off`. Read accepted values before changing a setting,
+and remove an override to restore its default.
 
 **Related:** [Setup](SETUP.md) | [Privacy and control](PRIVACY.md) |
 [Troubleshooting](TROUBLESHOOTING.md).

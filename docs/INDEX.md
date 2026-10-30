@@ -63,6 +63,10 @@ Also expect these preview limitations:
 - **Custom and smart shapes:** shapes that rely on macros, add-ins, protected
   cells, or other shape logic may not behave as in manual use. See
   [Test before standardizing](CUSTOM_SHAPES.md#test-before-standardizing).
+- **Add-ins and macros:** the server turns off Visio events while it works,
+  so add-ins, macros, and some built-in features might not run. Events stay
+  off for that Visio instance until you turn them back on. See
+  [Add-ins and macros don't run](TROUBLESHOOTING.md#add-ins-and-macros-dont-run).
 - **Legacy stencils:** `.vss` and `.vst` files don't expose indexed masters;
   use a modern-format copy. See [Discover and bind masters](CUSTOM_SHAPES.md#discover-and-bind-masters).
 - **Saving:** changes are saved only when the agent saves the drawing, so ask
@@ -81,22 +85,3 @@ Also expect these preview limitations:
 - **Client compatibility:** not every AI client or version has been tested
   with this preview. A local MCP configuration doesn't override your
   organization's restrictions on AI clients, MCP servers, or tools.
-
-### Add-ins and Automation events
-
-During automation, the server turns off Visio's
-`Application.EventsEnabled` setting so add-ins can't change a drawing
-unexpectedly. Some container and swimlane changes turn events on briefly.
-Add-ins, macros, and some built-in drawing features depend on these events
-and might not run or update the diagram as they do when you edit it yourself. The setting applies to the whole Visio instance, not one
-document: it stays off after an MCP call, and closing a drawing doesn't reset
-it.
-
-To restore normal behavior after you finish MCP work:
-
-1. Stop the MCP server.
-2. In Visio, go to **File > Options > Advanced**.
-3. Under **General**, select **Enable Automation Events**, and then select **OK**.
-
-Using MCP again can turn events off again. You don't need to disable your
-add-ins.

@@ -1,0 +1,41 @@
+title: Visio Desktop MCP
+description: Create, understand, and update editable Visio diagrams with your AI agent.
+url: https://microsoft.github.io
+baseurl: /Visio-Desktop-MCP-Server
+repository: microsoft/Visio-Desktop-MCP-Server
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+color_scheme: visio
+lang: en-US
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-relative-links
+  - jekyll-seo-tag
+
+relative_links:
+  enabled: true
+  collections: false
+
+search_enabled: true
+heading_anchors: true
+back_to_top: true
+back_to_top_text: Back to top
+aux_links:
+  GitHub:
+    - https://github.com/microsoft/Visio-Desktop-MCP-Server
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+exclude:
+  - README.md
+  - CODE_OF_CONDUCT.md
+  - scripts
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules

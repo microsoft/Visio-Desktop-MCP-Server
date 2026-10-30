@@ -1,83 +1,47 @@
 # Visio MCP Server
 
-Create, understand, and edit Visio diagrams with your AI assistant.
+Create, understand, and update native, editable Visio diagrams with your AI
+agent. This repository provides documentation and feedback channels for the
+[Microsoft.Visio.Mcp package](https://www.nuget.org/packages/Microsoft.Visio.Mcp).
 
-The [Visio MCP Server](https://www.nuget.org/packages/Microsoft.Visio.Mcp) connects
-MCP-compatible AI clients to Microsoft Visio Desktop on your Windows PC. This
-repository provides setup guidance, examples, and a place to share feedback.
+**Preview:** for evaluation, not production or critical workloads. Review the
+license terms included with the package.
 
-**Preview:** for evaluation only, not production or critical workloads. Review
-the license terms included with the NuGet package before use.
+## Documentation
 
-## What can you do?
+**[Documentation site](https://microsoft.github.io/Visio-Desktop-MCP-Server)**
 
-- Create flowcharts, org charts, network diagrams, and other drawings.
-- Read an existing diagram and ask questions about its contents.
-- Update shapes, text, connections, formatting, and Shape Data.
-- Check for common visual issues and export to PNG, SVG, or PDF.
-- Find shapes in installed or custom stencils.
+Read here on GitHub:
+[Overview](docs/INDEX.md) | [Set up](docs/SETUP.md) |
+[First diagram](docs/FIRST_DIAGRAM.md) | [Tool reference](docs/TOOLS.md) |
+[Examples](docs/EXAMPLES.md).
 
-## Get started
+[Troubleshooting](docs/TROUBLESHOOTING.md) | [Privacy](docs/PRIVACY.md) |
+[Help and feedback](docs/SUPPORT.md) | [Security](docs/SECURITY.md).
 
-You need Windows 10 or 11, licensed Visio Desktop, the
-[.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0), and an MCP-compatible
-AI client.
+## Maintain the site
 
-### 1. Connect your AI client
+Every published page lives in `docs`. Name Markdown files, including issue
+templates, in uppercase with underscores (for example, `VALIDATE_AND_EXPORT.md`),
+matching GitHub's `SUPPORT.md` and `CODE_OF_CONDUCT.md`. Folders, images,
+scripts, and Jekyll or Sass files keep the lowercase names their tools expect.
+Each subject has one canonical page; link to it instead of copying instructions. Each page sets a `permalink`, so
+published URLs don't change when files move. The relative-links
+plugin maps those links to each page's published permalink. Put images in
+`assets/images` and link them relatively from the page (for example,
+`../assets/images/name.png` from `docs`). Sanitize screenshots so they contain
+no personal paths, names, or confidential content.
 
-`dnx` downloads and runs the server from NuGet. No separate installation is needed.
+Site styling lives in `_sass`: the color scheme in `_sass/color_schemes/visio.scss`,
+overrides in `_sass/custom/custom.scss`, and the navigation breakpoint in
+`_sass/custom/setup.scss` (below 960px, navigation collapses into a menu).
+Before opening a pull request, run
+`python scripts/check_site.py _site --baseurl /Visio-Desktop-MCP-Server` on a
+built site to check internal links, assets, and anchors.
 
-For VS Code, add this to `.vscode\mcp.json`, then start the server from the MCP
-server list:
-
-```json
-{
-  "servers": {
-    "visio": {
-      "type": "stdio",
-      "command": "dnx",
-      "args": ["Microsoft.Visio.Mcp", "--prerelease"]
-    }
-  }
-}
-```
-
-For other clients, use `dnx Microsoft.Visio.Mcp --prerelease` as the local stdio
-server command. The surrounding configuration format depends on the client.
-
-### 2. Try a prompt
-
-> Open Visio and create a simple approval flowchart with a decision and two
-> outcomes. Save it in the default output folder and tell me the file path.
-
-Generated files default to `%USERPROFILE%\Documents\VisioModelMcp`.
-See [more examples](docs/EXAMPLES.md).
-
-## Available tools
-
-Your AI assistant chooses the tools needed for your request.
-
-| Tool | Purpose |
-| --- | --- |
-| `manage_visio` | Open or close Visio; import stencils and refresh the shape index. |
-| `manage_document` | Create, open, save, close, or export drawings; manage pages. |
-| `create_diagram` | Add a diagram to an existing page. |
-| `read_diagram` | Read a drawing, page, or specific shapes. |
-| `update_diagram` | Edit shapes, connections, containers, and layers. |
-| `validate_diagram` | Check for common visual issues. |
-| `content_search` | Find available stencils, templates, and shapes. |
-| `get_visual_model_schema` | Get the structured diagram format used by the tools. |
-
-## Before you use it
-
-Work on a copy of important drawings, review the result, and explicitly ask to
-save changes. AI-generated layouts and answers can be incomplete or inaccurate.
-
-This server requires desktop Visio on Windows. It does not run in Visio for the
-web, on macOS, or as a headless cloud service. Available shapes depend on your
-installed Visio content.
-
-[Troubleshooting](TROUBLESHOOTING.md) |
-[Privacy](PRIVACY.md) |
-[Help and feedback](SUPPORT.md) |
-[Security](SECURITY.md)
+The Pages configuration targets
+`https://microsoft.github.io/Visio-Desktop-MCP-Server`. The Documentation workflow
+builds the site and checks internal links/anchors on pull requests; only `main`
+deploys. Before the first deployment, a repository administrator must select
+**Settings > Pages > Source > GitHub Actions**. Adding these files doesn't
+publish the site or change repository settings.

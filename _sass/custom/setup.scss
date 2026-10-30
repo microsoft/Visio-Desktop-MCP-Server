@@ -1,0 +1,2 @@
+$visio-desktop-breakpoint: 960px;
+$media-queries: map-merge($media-queries, (md: $visio-desktop-breakpoint));

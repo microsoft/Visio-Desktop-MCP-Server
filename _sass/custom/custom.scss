@@ -1,0 +1,334 @@
+// Just the Docs also compiles these overrides for its bundled light/dark schemes.
+$visio-muted: #526179 !default;
+$visio-inline-code: #edf1f7 !default;
+$visio-warning-background: #fff8e6 !default;
+$visio-warning-border: #b86e00 !default;
+$code-linenumber-color: #e5edff !default;
+
+html {
+  color-scheme: light;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid $link-color;
+  outline-offset: 2px;
+}
+
+.side-bar {
+  border-bottom: 1px solid $border-color;
+}
+
+.site-header {
+  min-height: 96px;
+  height: auto;
+  max-height: none;
+  border-bottom: 0;
+}
+
+.site-title {
+  gap: 12px;
+  padding: 24px 22px;
+  font-size: 19px !important;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.site-title::before {
+  display: grid;
+  flex: 0 0 38px;
+  place-items: center;
+  height: 38px;
+  color: $body-background-color;
+  background: $link-color;
+  border-radius: 10px;
+  font-size: 23px;
+  content: "V";
+}
+
+.site-title:hover,
+.site-button:hover {
+  background-image: none;
+}
+
+.site-nav {
+  padding: 0 22px 24px;
+}
+
+.site-nav .nav-list .nav-list-item {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list-link {
+  min-height: 44px;
+  padding: 10px 40px 10px 14px;
+  color: $visio-muted;
+  background: $body-background-color;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list-link:hover,
+.site-nav .nav-list .nav-list-item > .nav-list-link.active {
+  color: $link-color;
+  background: $feedback-color;
+  background-image: none;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list-link.active {
+  border-color: $link-color;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list-expander {
+  width: 40px;
+  height: 44px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list-expander:hover {
+  background: $feedback-color;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list {
+  padding: 8px 0 0 12px;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list .nav-list-item > .nav-list-link {
+  color: $visio-muted;
+}
+
+.site-nav .nav-list .nav-list-item > .nav-list .nav-list-item > .nav-list-link:hover,
+.site-nav .nav-list .nav-list-item > .nav-list .nav-list-item > .nav-list-link.active {
+  color: $link-color;
+}
+
+.site-footer {
+  color: $visio-muted;
+  padding: 16px 22px;
+}
+
+.main {
+  min-width: 0;
+}
+
+.main-header {
+  padding: 0 22px;
+}
+
+.aux-nav {
+  padding-right: 0;
+}
+
+.main-content-wrap {
+  padding: 32px 22px;
+}
+
+.main-content {
+  h1 {
+    margin: 0 0 20px;
+    font-size: clamp(2.1rem, 4vw, 3.2rem) !important;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+  }
+
+  h2 {
+    margin: 38px 0 14px;
+    font-size: 23px !important;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: 17px !important;
+  }
+
+  p {
+    margin-bottom: 16px;
+  }
+
+  .preview-notice {
+    margin: 24px 0;
+    padding: 16px 20px;
+    color: #17243a;
+    background: $visio-warning-background;
+    border: 1px solid $visio-warning-border;
+    border-left-width: 4px;
+    border-radius: 8px;
+  }
+
+  > h1 + p {
+    max-width: 720px;
+    color: $visio-muted;
+    font-size: 19px;
+    line-height: 1.6;
+  }
+
+  li {
+    margin-top: 7px;
+  }
+
+  blockquote {
+    margin: 24px 0;
+    padding: 17px 20px;
+    color: $body-text-color;
+    background: $feedback-color;
+    border-left: 3px solid $link-color;
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
+
+  :not(pre, figure) > code {
+    padding: 2px 5px;
+    color: $body-text-color;
+    background: $visio-inline-code;
+    border: 0;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+  }
+
+  div.highlighter-rouge,
+  figure.highlight {
+    margin: 20px 0;
+    border-radius: 10px;
+  }
+
+  div.highlighter-rouge > div.highlight,
+  figure.highlight > pre,
+  > pre {
+    padding: 24px;
+    color: $code-linenumber-color;
+    background: $code-background-color;
+    border: 0;
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+
+  pre code {
+    padding: 0;
+    color: inherit;
+    background: none;
+    border: 0;
+    font-size: 14px;
+    overflow-wrap: normal;
+  }
+
+  .highlighter-rouge > button,
+  figure.highlight > button {
+    color: $code-linenumber-color;
+    background: $code-background-color;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .table-wrapper {
+    margin: 20px 0;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  table {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 14px 18px;
+    font-size: 14px;
+    vertical-align: top;
+  }
+
+  th {
+    color: $visio-muted;
+    background: $sidebar-color;
+    font-size: 13px;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+.main-content [id] {
+  scroll-margin-top: 24px;
+}
+
+.breadcrumb-nav-list-item,
+.search-input::placeholder,
+.main-content .text-small {
+  color: $visio-muted;
+}
+
+@media (min-width: $visio-desktop-breakpoint) {
+  .side-bar {
+    width: $nav-width;
+    min-width: $nav-width;
+    border-bottom: 0;
+  }
+
+  .side-bar + .main {
+    max-width: none;
+    margin-left: $nav-width;
+    margin-right: 0;
+  }
+
+  .site-header,
+  .site-nav,
+  .site-footer {
+    width: $nav-width;
+  }
+
+  .site-header {
+    min-height: 116px;
+  }
+
+  .site-title {
+    padding-top: 36px;
+  }
+
+  .main-content-wrap {
+    padding: 56px 64px 32px;
+  }
+
+  .main-header {
+    padding-right: 64px;
+    padding-left: 64px;
+  }
+}
+
+@media (min-width: $visio-desktop-breakpoint) and (max-width: 64rem) {
+  .main-content-wrap {
+    padding: 40px 30px 28px;
+  }
+
+  .main-header {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: ($visio-desktop-breakpoint - 0.001px)) {
+  .main-content > h1 + p {
+    font-size: 17px;
+  }
+
+  .main-content th,
+  .main-content td {
+    padding: 12px;
+  }
+}

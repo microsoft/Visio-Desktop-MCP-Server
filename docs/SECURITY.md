@@ -1,3 +1,8 @@
+---
+title: Security
+nav_exclude: true
+permalink: /security/
+---
 # Security
 
 Please do not report security vulnerabilities in public GitHub issues.

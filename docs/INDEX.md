@@ -35,8 +35,8 @@ license terms included with the package.
 
 ## Know the boundaries
 
-The server requires the installed Windows desktop app; it doesn't operate
-Visio for the web, run on macOS, or provide headless cloud automation. The
+The server works only with the Visio desktop app installed on Windows. It
+doesn't work with Visio for the web or provide headless cloud automation. The
 AI client reads your source files; the server doesn't import CSV, JSON, or
 Excel files itself. Only the capabilities exposed by its tools are available;
 some tasks may still need to be done directly in Visio.
@@ -65,9 +65,11 @@ Also expect these preview limitations:
   [Test before standardizing](CUSTOM_SHAPES.md#test-before-standardizing).
 - **Legacy stencils:** `.vss` and `.vst` files don't expose indexed masters;
   use a modern-format copy. See [Discover and bind masters](CUSTOM_SHAPES.md#discover-and-bind-masters).
-- **Saving:** changes aren't saved automatically, exporting doesn't save the
-  drawing, closing discards unsaved changes, and an export can replace an
-  earlier export with the same name. Don't edit the same diagram yourself,
+- **Saving:** changes are saved only when the agent saves the drawing, so ask
+  it to save and check the reported path before closing. You don't need to
+  save it yourself in Visio. Exporting doesn't save the drawing, closing discards
+  unsaved changes, and an export can replace an earlier export with the same
+  name. Don't edit the same diagram yourself,
   open another copy of it, or let more than one agent work on it at the same
   time. See [Manage pages and save](WORK_WITH_DIAGRAMS.md#manage-pages-and-save).
 - **Interactive session:** run the AI client, the server, and Visio in the

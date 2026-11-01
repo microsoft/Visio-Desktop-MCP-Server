@@ -35,7 +35,7 @@ response to a failed tool call.
 
 | Symptom | Check |
 | --- | --- |
-| Custom shapes missing | Follow [Custom shapes](CUSTOM_SHAPES.md): place files in My Shapes or a folder registered under **File > Options > Advanced > File Locations** (**Stencils** or **Templates**), explicitly refresh the index, then search. |
+| Custom shapes missing | Follow [Custom shapes](CUSTOM_CONTENT.md): place files in My Shapes or a folder registered under **File > Options > Advanced > File Locations** (**Stencils** or **Templates**), explicitly refresh the index, then search. |
 | Stencil listed but masters absent | Legacy `.vss`/`.vst` entries don't have package-indexed masters. Use a modern-format copy. Don't open the stencil as the target drawing. |
 | Missing or unexpected content | Read and compare against the complete source. [Validation](VALIDATE_AND_EXPORT.md) checks visual defects, not process completeness. |
 | Partial large-diagram answer | Narrow the read or retrieve all [issued chunks](TOOLS.md#read-results). Omitted nested fields aren't proof of absence. |

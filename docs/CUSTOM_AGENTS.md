@@ -8,7 +8,7 @@ has_toc: false
 
 Visio Desktop MCP Server provides the tools. A custom agent defines how to use
 them: approved shapes, source data, workflow, verification, and when to stop.
-Complete [setup](SETUP.md) and [approve your shape mappings](CUSTOM_SHAPES.md)
+Complete [setup](SETUP.md) and [approve your shape mappings](CUSTOM_CONTENT.md)
 first, then use the [sample agent](custom_agents/SAMPLE_AGENT.md).
 
 ## Why use one

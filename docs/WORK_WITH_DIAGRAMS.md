@@ -22,7 +22,7 @@ arbitrary CSV, JSON, or spreadsheets.
 > save as a new travel-approval.vsdx.
 
 Repeated source IDs describing branches shouldn't become duplicate steps.
-For shape-sensitive drawings, [resolve approved masters](CUSTOM_SHAPES.md)
+For shape-sensitive drawings, [resolve approved masters](CUSTOM_CONTENT.md)
 before authoring.
 
 ## Read without editing

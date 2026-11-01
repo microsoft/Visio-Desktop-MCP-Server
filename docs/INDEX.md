@@ -26,7 +26,7 @@ license terms included with the package.
 | Create, analyze, or make focused edits | [Work with diagrams](WORK_WITH_DIAGRAMS.md) |
 | Check layout and share an image or PDF | [Validate and export](VALIDATE_AND_EXPORT.md) |
 | Understand the eight tools and their contracts | [Tool reference](TOOLS.md) |
-| Use approved stencils and templates | [Custom shapes](CUSTOM_SHAPES.md) |
+| Use approved stencils and templates | [Custom shapes](CUSTOM_CONTENT.md) |
 | Reuse team-specific instructions | [Custom agents](CUSTOM_AGENTS.md) |
 | Write a clear request from source data | [Examples and best practices](EXAMPLES.md) |
 | Change output, discovery, caching, or diagnostics | [Configuration](CONFIGURATION.md) |
@@ -62,13 +62,13 @@ Also expect these preview limitations:
   checked. See [Validate and export](VALIDATE_AND_EXPORT.md).
 - **Custom and smart shapes:** shapes that rely on macros, add-ins, protected
   cells, or other shape logic may not behave as in manual use. See
-  [Test before standardizing](CUSTOM_SHAPES.md#test-before-standardizing).
+  [Test before standardizing](CUSTOM_CONTENT.md#test-before-standardizing).
 - **Add-ins and macros:** the server turns off Visio events while it works,
   so add-ins, macros, and some built-in features might not run. Events stay
   off for that Visio instance until you turn them back on. See
   [Add-ins and macros don't run](TROUBLESHOOTING.md#add-ins-and-macros-dont-run).
 - **Legacy stencils:** `.vss` and `.vst` files don't expose indexed masters;
-  use a modern-format copy. See [Discover and bind masters](CUSTOM_SHAPES.md#discover-and-bind-masters).
+  use a modern-format copy. See [Discover and bind masters](CUSTOM_CONTENT.md#discover-and-bind-masters).
 - **Saving:** changes are saved only when the agent saves the drawing, so ask
   it to save and check the reported path before closing. You don't need to
   save it yourself in Visio. Exporting doesn't save the drawing, closing discards

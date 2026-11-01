@@ -33,9 +33,9 @@ For changes now, use [manage_visio update_index](../tools/MANAGE_VISIO.md).
 It waits for refresh/publication and bypasses freshness without opening Visio
 or requiring a restart.
 
-Configure custom content through [registered Visio locations](../CUSTOM_SHAPES.md).
+Configure custom content through [registered Visio locations](../CUSTOM_CONTENT.md).
 Built-in content follows the Windows display language, falling back to English
 or another installed Visio language; there's no setting to choose it.
 
 **Related:** [Configuration](../CONFIGURATION.md) | [Logging](LOGGING.md) |
-[Custom shapes](../CUSTOM_SHAPES.md).
+[Custom shapes](../CUSTOM_CONTENT.md).

@@ -77,7 +77,7 @@ complete source inventory. Enumeration reports `totalCount`, `hasMore`,
 
 Missing/unreadable/locked or unsupported source paths are excluded before
 ranking/counts. Unindexed external files aren't imported; use
-[known discovery locations](../CUSTOM_SHAPES.md). Legacy file entries may
+[known discovery locations](../CUSTOM_CONTENT.md). Legacy file entries may
 have no extracted masters. Search doesn't restore unavailable files.
 UNC/device paths aren't usable search sources. A stale local full path can
 recover only a unique indexed filename; use the resolved full source binding

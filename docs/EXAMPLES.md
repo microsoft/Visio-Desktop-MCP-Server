@@ -30,7 +30,7 @@ Separate components from relationships so the agent can check exact counts:
 > Read back and compare all components, connections, labels, and metadata.
 > Save as a new app-context.vsdx and report the path and any differences.
 
-For organizational mappings, use [Custom shapes](CUSTOM_SHAPES.md) rather than
+For organizational mappings, use [Custom shapes](CUSTOM_CONTENT.md) rather than
 guessing stencil or master names.
 
 ## Make requests precise

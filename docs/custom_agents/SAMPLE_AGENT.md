@@ -8,7 +8,7 @@ permalink: /custom-agents/sample/
 
 This agent turns application inventories into architecture drawings using
 approved masters. Replace the illustrative stencil and master names with your
-[approved shape mappings](../CUSTOM_SHAPES.md).
+[approved shape mappings](../CUSTOM_CONTENT.md).
 
 ## Save the file
 

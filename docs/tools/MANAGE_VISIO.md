@@ -16,7 +16,7 @@ This tool doesn't open drawings; use [manage_document](MANAGE_DOCUMENT.md).
 | `action` | string | Yes | `open`, `close`, `update_index` |
 
 There is **no** client `options` or `filePath` argument. Place approved content
-in [known Visio locations](../CUSTOM_SHAPES.md).
+in [known Visio locations](../CUSTOM_CONTENT.md).
 
 ## Actions and results
 

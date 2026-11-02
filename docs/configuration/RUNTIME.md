@@ -15,7 +15,7 @@ mean **unset**, not necessarily your current machine's values.
 | Variable | Default | Accepted values and effect |
 | --- | --- | --- |
 | `VISIO_MCP_ROOT` | `%USERPROFILE%\Documents\VisioMcp` | Nonblank directory path; created at startup. Blank/whitespace uses default. Generated drawings/read artifacts, not authorization or app-data relocation |
-| `VISIO_MCP_VISIBLE` | Visible | `1`, `true`, `yes`, `on` enable visibility/repainting, case-insensitive. Any other explicit value, including empty, hides it |
+| `VISIO_APP_VISIBLE` | Visible | `1`, `true`, `yes`, `on` enable visibility/repainting, case-insensitive. Any other explicit value, including empty, hides it |
 {: .settings-table }
 
 Hidden doesn't mean headless: an interactive Windows session, installed

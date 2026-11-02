@@ -19,6 +19,12 @@ Read here on GitHub:
 [Troubleshooting](docs/TROUBLESHOOTING.md) | [Privacy](docs/PRIVACY.md) |
 [Help and feedback](docs/SUPPORT.md) | [Security](docs/SECURITY.md).
 
+## Feedback
+
+Open an issue in
+[GitHub Issues](https://github.com/microsoft/Visio-Desktop-MCP-Server/issues), or
+send feedback from Visio: in the Visio desktop app, select **Help** > **Feedback**.
+
 ## Maintain the site
 
 Every published page lives in `docs`. Name Markdown files, including issue

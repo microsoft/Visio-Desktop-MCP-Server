@@ -11,6 +11,9 @@ or suggest a feature, open an issue in
 Before you open a new issue, search the existing issues to see whether someone
 has already reported the same problem or made the same request.
 
+You can also send feedback from Visio. In the Visio desktop app, select
+**Help** > **Feedback**.
+
 If something isn't working, check [Troubleshooting](TROUBLESHOOTING.md) first,
 because it may already describe a fix. If file logging is enabled, the server
 writes its logs to `%LOCALAPPDATA%\VisioMcp\logs`. You can include relevant log

@@ -17,7 +17,7 @@ retained drawing IDs belong to the previous session.
 | [Logging and diagnostics](configuration/LOGGING.md) | File logging, log rollover, locations, telemetry distinction |
 
 The server reads three user-facing settings: `VISIO_MCP_ROOT`,
-`VISIO_MCP_VISIBLE`, and `VISIO_MCP_LOG_FILE`. Other `VISIO_MCP_*` variables
+`VISIO_MCP_VISIBLE`, and `VISIO_MCP_LOCAL_LOG_ENABLED`. Other `VISIO_MCP_*` variables
 from earlier previews, such as log level, log retention, locale, caching, and
 index refresh overrides, are ignored; remove them from your configuration.
 
@@ -42,7 +42,7 @@ inside every client's JSON environment values.
       "env": {
         "VISIO_MCP_ROOT": "C:\\VisioOutput",
         "VISIO_MCP_VISIBLE": "true",
-        "VISIO_MCP_LOG_FILE": "true"
+        "VISIO_MCP_LOCAL_LOG_ENABLED": "true"
       }
     }
   }
@@ -68,7 +68,7 @@ See [exact paths and logging controls](configuration/LOGGING.md).
 Changing output folders doesn't relocate these files.
 
 Boolean parsing isn't uniform. `VISIO_MCP_VISIBLE` shows Visio only for `1`,
-`true`, `yes`, or `on`, while `VISIO_MCP_LOG_FILE` turns off disk logging only
+`true`, `yes`, or `on`, while `VISIO_MCP_LOCAL_LOG_ENABLED` turns off disk logging only
 for `0`, `false`, or `off`. Read accepted values before changing a setting,
 and remove an override to restore its default.
 

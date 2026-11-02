@@ -14,7 +14,7 @@ then restart safely.
 
 | Variable | Default | Accepted values and effect |
 | --- | --- | --- |
-| `VISIO_MCP_LOG_FILE` | Enabled | Trimmed `0`, `false`, or `off`, case-insensitive, disables disk logging; other values keep it enabled |
+| `VISIO_MCP_LOCAL_LOG_ENABLED` | Enabled | Trimmed `0`, `false`, or `off`, case-insensitive, disables disk logging; other values keep it enabled |
 
 The log level and the size limit for logged tool arguments are built into the
 server; environment variables can't change them. Tool arguments in logs

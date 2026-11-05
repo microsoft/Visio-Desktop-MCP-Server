@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a problem using Visio Desktop MCP Server
+about: Report a problem using Microsoft Visio Desktop MCP Server
 ---
 
 <!--

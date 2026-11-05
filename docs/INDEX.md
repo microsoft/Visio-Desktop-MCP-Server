@@ -3,7 +3,7 @@ title: Overview
 nav_order: 1
 permalink: /
 ---
-# Visio Desktop MCP Server
+# Microsoft Visio Desktop MCP Server
 
 Create, inspect, and update **native, editable Visio diagrams** from an
 MCP-compatible AI client. The client interprets your request and supplies the

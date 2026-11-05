@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an improvement to Visio Desktop MCP Server
+about: Suggest an improvement to Microsoft Visio Desktop MCP Server
 ---
 
 ## What are you trying to do?

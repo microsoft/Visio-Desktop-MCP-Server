@@ -6,7 +6,7 @@ has_toc: false
 ---
 # Reuse standards with a custom agent
 
-Visio Desktop MCP Server provides the tools. A custom agent defines how to use
+Microsoft Visio Desktop MCP Server provides the tools. A custom agent defines how to use
 them: approved shapes, source data, workflow, verification, and when to stop.
 Complete [setup](SETUP.md) and [approve your shape mappings](CUSTOM_CONTENT.md)
 first, then use the [sample agent](custom_agents/SAMPLE_AGENT.md).

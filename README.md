@@ -1,4 +1,4 @@
-# Visio Desktop MCP Server (Preview)
+# Microsoft Visio Desktop MCP Server (Preview)
 
 Create, understand, and update native, editable Visio diagrams with your AI
 agent. This repository provides documentation and feedback channels for the

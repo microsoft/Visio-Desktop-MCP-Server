@@ -1,0 +1,41 @@
+Microsoft Visio Desktop MCP Server License Terms
+
+1. Definitions. For purposes of this Agreement: “Software” means the Microsoft Visio Desktop MCP Server and related components provided under this Agreement. “Internal Business Purposes” means use by you and your affiliates solely for your internal operations, excluding resale or external service provision unless expressly authorized by Microsoft.
+
+2. Grant of License. Subject to the terms of this Agreement, Microsoft Corporation (“Microsoft”) grants you a limited, non-exclusive, non-transferable, revocable license to install and use the Software solely for Internal Business Purposes.
+
+3. Ownership. Microsoft retains all rights, title, and interest in and to the Software, including all intellectual property rights. No rights are granted except as expressly stated in this Agreement.
+
+4. Restrictions. You may not: (a) Modify, reverse engineer, decompile, or disassemble the Software; (b) Distribute, sublicense, rent, lease, or transfer the Software to any third party without Microsoft’s prior written consent; (c) Use the Software to provide services to third parties except as expressly authorized by Microsoft.
+
+5. Security and Compliance. You must implement security measures consistent with Microsoft’s published security guidance, including enabling Entra ID authentication, secure token management, and network isolation. You are responsible for compliance with all applicable organizational, regulatory, and contractual requirements, including Microsoft’s Responsible AI principles for any AI functionality.
+
+6. Permissions and Risk. MCP clients can invoke operations based on the user’s Azure Role-Based Access Control (RBAC) permissions. Autonomous or misconfigured clients may perform destructive actions. You should review and apply least-privilege RBAC roles and implement safeguards before deployment. Certain safeguards, such as flags to prevent destructive operations, are not standardized in the MCP specification and may not be supported by all clients.
+
+7. Data Collection and Privacy. The Software may collect information about you and your use of the Software and send it to Microsoft. Microsoft may use this information to provide services and improve products. Telemetry may be disabled as described in the documentation. If you collect data from users of your applications, you must comply with applicable law and provide appropriate notices, including Microsoft’s privacy statement.
+
+8. Compliance Responsibility. The Software may interact with clients and services outside Microsoft compliance boundaries. You are responsible for ensuring that any integration complies with applicable organizational, regulatory, and contractual requirements.
+
+9. Data Residency. The Software may process customer data outside your region. Data is encrypted in transit. You are responsible for obtaining all necessary consents for data transfer and processing, including cross-border transfers.
+
+10. Security. Your credentials are always handled securely through the official Azure Identity SDK - we never store or manage tokens directly.
+MCP is a new and developing standard. As with all new technology standards, you should review the security of any systems that integrate with MCP servers, such as MCP hosts, clients, agents, AI applications, and models and confirm that they comply with system requirements, standards, and expectations.
+You should follow industry and Microsoft security guidance for MCP servers, including enabling Entra ID authentication, secure token management, and network isolation. Refer to Security Best Practices - Model Context Protocol and Microsoft Security Documentation for details.
+
+11. Permissions and Risk. MCP clients can invoke operations based on the user’s Azure role-based access control (RBAC) permissions. Autonomous or misconfigured clients may perform destructive actions. You should review and apply least-privilege RBAC roles and implement safeguards before deployment. Certain safeguards, such as flags to prevent destructive operations, are not standardized in the MCP specification and may not be supported by all clients.
+
+12. Data Residency. This MCP server may process customer data outside the customer's region. Such data is encrypted in transit. By using this server, you acknowledge your responsibility to ensure your use meets your organization’s compliance requirements, and consent that your data may be processed outside your region.
+
+10. Underlying Resources. Access to and use of underlying resources [or name of Microsoft service] via the Software is governed by the license terms of those resources [or name of Microsoft service].
+
+11. Customer Copyright Commitment. The Software is not a Covered Product under the Microsoft Customer Copyright Commitment (CCC). While the Software may (i) provide access to one or more products or services that are covered by the CCC, and/or (ii) be used in connection with a product or service that is covered by the CCC, such coverage does not extend to the Software. Use of the Software does not, by itself, give rise to CCC protections.
+
+12. Export Control. You must comply with all applicable export laws and regulations, including U.S. Export Administration Regulations and local jurisdiction requirements, and not export or re-export the Software to embargoed countries or prohibited parties.
+
+13. Audit and Termination. Microsoft may audit your use of the Software to verify compliance. Microsoft may terminate this Agreement immediately upon notice if you breach any term.
+
+14. No Warranty / Limitation of Liability. The Software is provided “as is” without warranties or conditions of any kind, either express or implied. Microsoft shall not be liable for any damages arising from use, misuse, or misconfiguration of this software. Microsoft’s liability for any claim arising under this Agreement shall not exceed $5 or the amount paid for the Software, whichever is less. Microsoft shall not be liable for indirect, incidental, or consequential damages.
+
+15. Third Party Components. The Software may use or depend on third party components. You are responsible for reviewing and complying with the licenses and security posture of any third-party components.
+
+16. Governing Law. This Agreement is governed by the laws of the State of Washington, USA, without regard to conflict of laws principles. Venue for any dispute shall be in King County, Washington.”

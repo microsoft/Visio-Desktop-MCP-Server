@@ -33,12 +33,23 @@ input:focus-visible {
 }
 
 .site-title {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
   gap: 12px;
   padding: 24px 22px;
   font-size: 18px !important;
   font-weight: 600;
   line-height: 1.25;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.site-header .site-button {
+  flex: 0 0 auto;
+  min-width: 44px;
+  min-height: 44px;
+  height: auto;
 }
 
 .site-title::before {
@@ -187,6 +198,8 @@ input:focus-visible {
 }
 
 .main-content {
+  overflow-wrap: anywhere;
+
   h1 {
     margin: 0 0 20px;
     font-size: clamp(2.1rem, 4vw, 3.2rem) !important;
@@ -394,6 +407,54 @@ input:focus-visible {
 }
 
 @media (max-width: ($visio-desktop-breakpoint - 0.001px)) {
+  .side-bar + .main .main-header.nav-open {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .main-header {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .search {
+    min-width: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    margin-left: 0;
+  }
+
+  .aux-nav .site-button {
+    min-height: 44px;
+  }
+
+  .site-nav .nav-list .nav-list-item > .nav-list-link {
+    padding-right: 48px;
+    overflow-wrap: anywhere;
+  }
+
+  .site-nav .nav-list .nav-list-item > .nav-list-expander {
+    width: 44px;
+    height: 44px;
+  }
+
+  .main-content-wrap {
+    padding: 24px 16px;
+  }
+
+  .breadcrumb-nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+  }
+
   .main-content > h1 + p {
     font-size: 17px;
   }
@@ -401,5 +462,21 @@ input:focus-visible {
   .main-content th,
   .main-content td {
     padding: 12px;
+  }
+
+  .main-content {
+    .field-table th:first-child,
+    .field-table td:first-child {
+      width: auto;
+    }
+
+    .field-table th:first-child,
+    .field-table td:first-child,
+    .settings-table th:first-child,
+    .settings-table td:first-child,
+    .settings-table th:nth-child(2),
+    .settings-table td:nth-child(2) {
+      white-space: normal;
+    }
   }
 }

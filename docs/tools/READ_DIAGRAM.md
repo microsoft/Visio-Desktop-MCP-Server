@@ -8,8 +8,8 @@ permalink: /tools/read-diagram/
 
 Read diagram **content**, not visual defects. Source reads require the intended
 drawing to be retained through `manage_document` `open` or `create`.
-Reading never opens or reopens a drawing or starts Visio, even for package-first
-reads. Issued-artifact retrieval doesn't require an open drawing or Visio.
+Reading never opens or reopens a drawing or starts Visio.
+Issued-artifact retrieval doesn't require an open drawing or Visio.
 Reads don't save the drawing.
 
 ## Source-read arguments
@@ -26,16 +26,15 @@ Reads don't save the drawing.
 | `includeLayers` | Boolean: `false` | Page layer definitions and memberships |
 | `outputPath` | Optional string | Exact `.json` filename, not a directory; requests an artifact destination |
 
+If `outputPath` names an existing JSON file, that file is replaced. This tool has no overwrite flag. Use a new `.json` filename to preserve existing files, or omit `outputPath` to let the server choose a destination when an artifact is needed.
+
 Before reading an existing file, open it with
 [manage_document](MANAGE_DOCUMENT.md) `action="open"` and reuse its returned
 `diagramId`. Use `action="create"` only when a new drawing is intended, not
 to recover an existing-document task. `filePath` is an alternative selector
 for an already-retained saved drawing, not an open request.
 
-At least one document selector is required. Omit unused arguments rather
-than sending null read selectors/flags. Presentation/spatial opt-ins may
-require live reads. Clean saved package formats can use package-first reading;
-dirty/never-saved drawings use live state. Don't save only to optimize reads.
+At least one document selector is required. Omit unused arguments rather than sending null read selectors or flags. Reads include unsaved edits; don't save the drawing solely to read it.
 
 ## Targets
 
@@ -54,9 +53,9 @@ group ancestry is separate. Don't autonomously use the user's selection.
 
 ## Stable shape IDs
 
-Copying shapes in Visio can duplicate their stored IDs. When such copies are detected, reads return distinct page/shape-qualified IDs without changing the drawing or discarding copies. Unrelated unique IDs stay unchanged, and relationship and parent references use the same returned IDs. Use those exact IDs for follow-up reads and edits; the original duplicated ID remains ambiguous. Deleting another copy doesn't by itself invalidate the surviving shape's previously returned qualified ID.
+Use the exact shape and connector IDs returned by `read_diagram` for follow-up reads and edits. Don't reconstruct IDs or substitute labels, names, or native numeric IDs.
 
-A read limited to selected pages or shapes may not discover a copy outside that scope. Don't infer document-wide ID uniqueness from a narrowed read. Unresolved identity collisions still return `DUPLICATE_ID`.
+A read limited to selected pages or shapes doesn't establish document-wide ID uniqueness. Ambiguous IDs can return `DUPLICATE_ID`; don't guess which shape they identify.
 
 ## Examples
 

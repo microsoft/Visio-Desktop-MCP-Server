@@ -19,10 +19,9 @@ index refresh. For changed content, use [update_index](MANAGE_VISIO.md).
 | `stencil` | Optional string | Scope shapes to one indexed file's name, base name, display name, or full path; not a drawing |
 | `count` | Integer: `10` | Ranked limit clamped to 0-100; enumeration page size to 1-100 |
 | `offset` | Integer: `0` | Nonnegative enumeration offset; ignored for ranked search |
-| `synonyms` | Optional string | Caller-supplied comma/semicolon-separated alternate terms; merged by best per-master score |
+| `synonyms` | Optional string | Comma/semicolon-separated alternate search terms; applies to ranked search |
 
-There is no `options` object. Search is lexical/metadata-based, not embeddings:
-arbitrary semantic synonyms aren't inferred.
+There is no `options` object. Search matches indexed names and metadata; it doesn't infer alternate terms. Supply `synonyms` when you need alternate terms in ranked search.
 
 ## Search versus enumeration
 
@@ -34,8 +33,7 @@ arbitrary semantic synonyms aren't inferred.
 | Empty keyword with `type="stencil"`/`"template"` | Enumerate indexed files |
 | `type="any"` without source scope | Can return files and masters |
 
-Scoped filtering uses name substrings/alias matches; trailing search markers
-are stripped, not ranked prefix/fuzzy operators. `synonyms` doesn't broaden
+Scoped filtering matches name substrings and aliases; prefix and fuzzy operators don't apply. `synonyms` doesn't broaden
 scoped enumeration/filtering. Follow returned `nextOffset` for enumeration.
 
 ## Examples
@@ -62,8 +60,7 @@ available `kind`, `isContainer`, connection/text evidence,
 File results include name, display name, path, kind, and master count.
 
 Copy **`masterId` unchanged into shape `NameU`**. If supplying `StencilPath`,
-copy `path` from that same result. Preserve the pair, including full-path/
-escaped IDs; don't decode/reconstruct one or select a source by filename alone.
+copy `path` from that same result. Use both values unchanged; don't reconstruct them or select a source by filename alone.
 Reuse the binding for equivalent shape types.
 
 `score` is normalized: rank one isn't proof of suitability. Inspect absolute
@@ -75,8 +72,7 @@ inspect `candidateCount`/`candidatesTruncated`. Ranked results alone aren't a
 complete source inventory. Enumeration reports `totalCount`, `hasMore`,
 `truncated`, and `nextOffset` where applicable.
 
-Missing/unreadable/locked or unsupported source paths are excluded before
-ranking/counts. Unindexed external files aren't imported; use
+Missing, unreadable, locked, or unsupported sources aren't included in search results or result totals. Unindexed external files aren't imported; use
 [known discovery locations](../CUSTOM_CONTENT.md). Legacy file entries may
 have no extracted masters. Search doesn't restore unavailable files.
 UNC/device paths aren't usable search sources. A stale local full path can

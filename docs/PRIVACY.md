@@ -38,7 +38,7 @@ content. Conversely, disabling local file logging doesn't disable remote
 diagnostics or stderr output.
 
 This content-free policy doesn't cover local disk logs, MCP tool responses,
-AI-client conversations, or separately captured evaluation/session artifacts.
+AI-client conversations, or saved transcripts and artifacts.
 Local disk logs can contain search terms, paths, and exception messages/stacks.
 Tool responses, conversations, and captured artifacts can also contain drawing
 content or native error details. Review and sanitize these before sharing.

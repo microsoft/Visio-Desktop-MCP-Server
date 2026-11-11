@@ -13,14 +13,12 @@ retained drawing IDs belong to the previous session.
 
 | Reference | Contents |
 | --- | --- |
-| [Runtime and discovery](configuration/RUNTIME.md) | Output root, visibility, session mode, index refresh, custom-content locations |
+| [Runtime and discovery](configuration/RUNTIME.md) | Output root, visibility, index refresh, custom-content locations |
 | [Logging and diagnostics](configuration/LOGGING.md) | File logging, log rollover, locations, telemetry distinction |
 
-The server reads four runtime settings: `VISIO_MCP_ROOT`, `VISIO_APP_VISIBLE`, `VISIO_MCP_LOCAL_LOG_ENABLED`, and `VISIO_MCP_SESSION_TYPE`. Leave session type unset for normal interactive use; see [session mode](configuration/RUNTIME.md#session-mode) before changing it.
+For normal client use, configure output, visibility, and local logging with `VISIO_MCP_ROOT`, `VISIO_APP_VISIBLE`, and `VISIO_MCP_LOCAL_LOG_ENABLED`.
 
-Other `VISIO_MCP_*` variables
-from earlier previews, such as log level, log retention, locale, caching, and
-index refresh overrides, are ignored; remove them from your configuration.
+Overrides for log level, log retention, locale, caching, and index refresh from earlier previews are ignored; remove them from your configuration.
 
 Tool arguments such as `options.autoLayout`, export `dpi`, and `overwrite`
 are per-request settings, **not environment variables**. Find them in the
@@ -63,10 +61,7 @@ See [runtime settings](configuration/RUNTIME.md#output-and-application).
 
 ## Local diagnostic files
 
-Logs, stencil snapshots, and the search database live under the fixed
-`%LOCALAPPDATA%\VisioMcp` app-data root, separately from diagrams.
-See [exact paths and logging controls](configuration/LOGGING.md).
-Changing output folders doesn't relocate these files.
+Logs and discovery/search data are stored separately from diagrams. See [local directories and logging controls](configuration/LOGGING.md). Changing the output folder doesn't relocate these directories.
 
 Boolean parsing isn't uniform. `VISIO_APP_VISIBLE` shows Visio only for `1`,
 `true`, `yes`, or `on`, while `VISIO_MCP_LOCAL_LOG_ENABLED` turns off disk logging only

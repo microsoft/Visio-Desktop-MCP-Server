@@ -27,8 +27,7 @@ encoded-call examples under `toolInputs`, alongside the nested shape,
 relationship, and operation schemas. See the
 [schema reference](tools/GET_VISUAL_MODEL_SCHEMA.md) and
 [Visual Model payload reference](tools/VISUAL_MODEL.md).
-Server-injected C# services, logging, cancellation, progress, and request
-context parameters are **not client arguments**.
+Send only arguments listed in the tool schema.
 
 ## Calling sequence and units
 

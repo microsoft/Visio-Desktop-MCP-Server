@@ -50,10 +50,7 @@ After adding, changing, or removing files, or changing content locations, ask:
 > Refresh the Visio stencil index, then find the ApprovedArchitecture stencil
 > and list its available Application, Service, and Data Store masters.
 
-Refresh uses `manage_visio action="update_index"` and publishes the refreshed
-snapshot before returning. It needs no Visio launch or server restart. Check
-`failedStencilCount` for unreadable/unsupported sources; `persisted=false`
-means the refresh is available in memory but wasn't written to the cache.
+Refresh uses `manage_visio action="update_index"`. Updated content is available to search when the call finishes, without launching Visio or restarting the server. Check `failedStencilCount` for unreadable/unsupported sources. If `persisted=false`, the refreshed content is usable in the current session, but this refresh wasn't saved for reuse after a restart.
 
 The server **doesn't import or copy** stencils from arbitrary folders.
 
@@ -78,9 +75,7 @@ Use a modern-format copy when master discovery is required.
 Try representative masters in a temporary drawing. Review resizing, text,
 connectors, Shape Data, and actual container/list membership.
 
-Ordinary automation suppresses add-on dispatch, with guarded exceptions for
-required native container/swimlane behavior. Don't assume every macro, add-in,
-or smart-shape behavior will run as in manual editing.
+Macros, add-ins, and smart shapes may behave differently during MCP automation than during manual editing. Check that the shapes work as intended; see [troubleshooting](TROUBLESHOOTING.md#add-ins-and-macros-dont-run) if features stop updating.
 
 **Related:** [Custom agents](CUSTOM_AGENTS.md) to reuse approved mappings |
 [Examples](EXAMPLES.md) for shape-selection prompts |

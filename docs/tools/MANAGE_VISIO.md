@@ -24,7 +24,7 @@ in [known Visio locations](../CUSTOM_CONTENT.md).
 | --- | --- | --- |
 | `open` | Explicitly start Visio before desktop operations; reuse the live instance on repeated opens | `instanceId`, `open` |
 | `close` | Check all live documents before closing saved retained drawings and quitting only the server-owned application; unsaved work blocks shutdown with a confirmation warning, not a tool error | `instanceId`, `open`, `alreadyClosed` where applicable; `open:true`, `requiresConfirmation:true`, and warnings when unsaved work blocks close |
-| `update_index` | Rescan known locations and publish the refreshed snapshot before returning | `action`, `stencilCount`, `masterCount`, `failedStencilCount`, `persisted`, `finishedUtc` |
+| `update_index` | Rescan known locations; updated content is available to search when the call finishes | `action`, `stencilCount`, `masterCount`, `failedStencilCount`, `persisted`, `finishedUtc` |
 
 A new launch receives a new instance ID. Repeated open preserves its ID and
 retained drawings. Closing an already externally closed application is
@@ -32,12 +32,11 @@ idempotent. [manage_document](MANAGE_DOCUMENT.md) `action="open"` starts Visio
 if needed, including after external closure. Other document actions and
 source reads don't implicitly restart it.
 
-Refresh is package-only: it neither launches Visio nor requires a restart.
-It bypasses the [automatic refresh freshness gate](../configuration/RUNTIME.md#index-freshness).
+Refresh neither launches Visio nor requires a restart.
+It runs even when the index is newer than the [automatic refresh threshold](../configuration/RUNTIME.md#index-freshness).
 It doesn't import/copy files or update shapes already placed in drawings.
 Check `failedStencilCount`: completion doesn't mean every source was readable.
-`persisted=false` means the refreshed snapshot is in memory but wasn't written
-to the persistent cache, for example when another writer owns the cache lock.
+`persisted=false` doesn't mean refresh failed: the refreshed content is usable in the current session, but this refresh wasn't saved for reuse after a restart.
 
 ## Examples
 

@@ -16,25 +16,20 @@ then restart safely.
 | --- | --- | --- |
 | `VISIO_MCP_LOCAL_LOG_ENABLED` | Enabled | Trimmed `0`, `false`, or `off`, case-insensitive, disables disk logging; other values keep it enabled |
 
-The log level is built into the server; environment variables can't change
-it. Tool-call logging omits serialized arguments and result text. An empty
-argument placeholder doesn't mean the actual request had no arguments.
-Individual diagnostic messages in disk logs can still contain search terms,
-paths, and exception messages/stacks.
+The log level isn't configurable. Tool-call logs omit request arguments and result text, but individual diagnostic messages can still contain search terms, paths, and exception messages/stacks.
 
 Logs roll over to a new file each day. The server doesn't delete old log
 files, so review and remove them when you no longer need them.
 
 ## Fixed locations
 
-| Files | Location |
+| Purpose | Directory |
 | --- | --- |
-| Daily logs | `%LOCALAPPDATA%\VisioMcp\logs\visio-mcp-YYYY-MM-DD.log` |
-| Stencil snapshot/usage | `%LOCALAPPDATA%\VisioMcp\stencil-cache\index.json` and `usage.json` |
-| Master-search SQLite database | `%LOCALAPPDATA%\VisioMcp\sqlite_index\masters_corpus_v3.db` |
+| Logs | `%LOCALAPPDATA%\VisioMcp\logs` |
+| Stencil discovery data | `%LOCALAPPDATA%\VisioMcp\stencil-cache` |
+| Search data | `%LOCALAPPDATA%\VisioMcp\sqlite_index` |
 
-`VISIO_MCP_ROOT` doesn't move these files. Published CLI launch settings don't
-expose their paths as directory/database overrides.
+`VISIO_MCP_ROOT` doesn't move these directories. Their locations aren't configurable.
 
 The server also logs to **stderr**, keeping stdout for MCP protocol messages.
 Disabling file logging doesn't disable stderr; inspect the client's server
@@ -42,22 +37,13 @@ output for startup errors.
 
 Disk logs retain ordinary diagnostic messages and exception details; they
 aren't covered by the content-free policy for stderr and remote diagnostics.
-Stderr uses controlled messages and diagnostic categories, not arbitrary free
-text. Diagram content, paths, names, raw arguments/results, and exception
-messages/stacks aren't included as fallback stderr text. Unrecognized
-diagnostic messages are omitted from stderr. See
+Stderr omits diagram content, paths, names, raw arguments/results, and exception messages/stacks. See
 [Privacy and control](../PRIVACY.md#diagnostic-telemetry) for the diagnostic
 information retained and the boundaries of this policy.
 
 ## Local output versus remote telemetry
 
-Disk logging, stderr, local usage ranking, and remote operational diagnostics
-are separate. Use supported Office diagnostic-data controls and your
-organization's policy.
-
-Required-tier diagnostic eligibility isn't proof of emission: Office
-permission, build/configured routing, and successful sink initialization also
-matter. See [Privacy and control](../PRIVACY.md#diagnostic-telemetry).
+Local file logging and remote diagnostics have separate controls. Disabling file logging doesn't disable remote diagnostics. Use supported Office diagnostic-data controls and your organization's policy. See [Privacy and control](../PRIVACY.md#diagnostic-telemetry).
 
 Review/redact logs before sharing. Don't post drawings, private paths, raw
 arguments, or confidential content publicly. Use the

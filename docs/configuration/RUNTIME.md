@@ -25,15 +25,6 @@ drawing, or let [manage_document open](../tools/MANAGE_DOCUMENT.md) start
 Visio when opening an intended existing drawing. Other tools don't start
 it implicitly. No environment setting saves a drawing automatically.
 
-## Session mode
-
-| Variable | Default | Accepted values and effect |
-| --- | --- | --- |
-| `VISIO_MCP_SESSION_TYPE` | `interactive` | Trimmed, case-insensitive `interactive` or `eval` labels the session in operational diagnostics. Unset/blank uses `interactive`; other values become `unknown`. `eval` also requires a newly launched, verified Visio instance |
-{: .settings-table }
-
-Leave this unset for normal client use. `eval` is for controlled evaluation, not a startup troubleshooting switch: it rejects a shared or unverifiable Visio instance with `VISIO_NOT_AVAILABLE` before changing its display, add-on, or document state. It doesn't terminate other Visio sessions or guarantee that no other Visio processes are running. Changing session type doesn't override Office diagnostic-data permissions.
-
 ## Index freshness
 
 The first eligible tool call in a session refreshes the stencil index in the
@@ -42,8 +33,7 @@ interval is **not a periodic timer** and can't be changed with an environment
 variable.
 
 For changes now, use [manage_visio update_index](../tools/MANAGE_VISIO.md).
-It waits for refresh/publication and bypasses freshness without opening Visio
-or requiring a restart.
+It waits until updated content is available to search, even if the index was refreshed recently, without opening Visio or requiring a restart.
 
 Configure custom content through [registered Visio locations](../CUSTOM_CONTENT.md).
 Built-in content follows the Windows display language, falling back to English

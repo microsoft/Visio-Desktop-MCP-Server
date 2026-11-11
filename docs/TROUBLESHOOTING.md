@@ -59,7 +59,7 @@ paths and native error text; review them before sharing.
 | Symptom | Check |
 | --- | --- |
 | Custom shapes missing | Follow [Custom shapes](CUSTOM_CONTENT.md): place files in My Shapes or a folder registered under **File > Options > Advanced > File Locations** (**Stencils** or **Templates**), explicitly refresh the index, then search. |
-| Stencil listed but masters absent | Legacy `.vss`/`.vst` entries don't have package-indexed masters. Use a modern-format copy. Don't open the stencil as the target drawing. |
+| Stencil listed but masters absent | Legacy `.vss`/`.vst` files can be listed without discoverable masters. Use a modern-format copy. Don't open the stencil as the target drawing. |
 | Missing or unexpected content | Read and compare against the complete source. [Validation](VALIDATE_AND_EXPORT.md) checks visual defects, not process completeness. |
 | Partial large-diagram answer | Narrow the read or retrieve all [issued chunks](TOOLS.md#read-results). Omitted nested fields aren't proof of absence. |
 | Edit fails midway | Inspect what changed before requesting a smaller correction. A successful response can still contain operation failures. |
@@ -67,11 +67,7 @@ paths and native error text; review them before sharing.
 
 ## Add-ins and macros don't run
 
-During automation, the server turns off Visio's `Application.EventsEnabled`
-setting so add-ins can't change a drawing unexpectedly. Some container and
-swimlane changes turn events on briefly. Add-ins, macros, and some built-in
-drawing features depend on these events and might not run or update the
-diagram as they do when you edit it yourself.
+MCP automation turns off Visio's **Enable Automation Events** setting. Add-ins, macros, and some built-in drawing features may not run or update the diagram as they do during manual editing.
 
 The setting applies to the whole Visio instance, not one document: it stays
 off after an MCP call, and closing a drawing doesn't reset it. To turn events

@@ -69,6 +69,8 @@ Disabled checks, unselected pages, and skipped contrast candidates are
 pages/candidates actually evaluated. An absent code count isn't proof of a
 clean check if relevant candidates were skipped.
 
+Transparent-background text extending outside its shape's fill bounds is unevaluated for contrast, not compared against that fill. The validator doesn't guess the page background behind such text; inspect the contrast coverage and skip reasons before calling it clean.
+
 Read back labels, identifiers, relationships, memberships, and data separately
 to establish source fidelity. Formal validation doesn't save the drawing.
 

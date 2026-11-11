@@ -7,7 +7,7 @@ permalink: /tools/update-diagram/
 # update_diagram
 
 Apply a nonempty, ordered edit batch to one existing page. Read first and use
-returned stable shape/connector IDs. Never substitute labels, guesses,
+[returned stable shape/connector IDs](READ_DIAGRAM.md#stable-shape-ids). Never substitute labels, guesses,
 `visioShapeId`, or page-local strings such as `1:48`.
 
 ## Arguments and options

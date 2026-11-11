@@ -15,7 +15,7 @@ mean **unset**, not necessarily your current machine's values.
 | Variable | Default | Accepted values and effect |
 | --- | --- | --- |
 | `VISIO_MCP_ROOT` | `%USERPROFILE%\Documents\VisioMcp` | Nonblank directory path; created at startup. Blank/whitespace uses default. Generated drawings/read artifacts, not authorization or app-data relocation |
-| `VISIO_APP_VISIBLE` | Visible | `1`, `true`, `yes`, `on` enable visibility/repainting, case-insensitive. Any other explicit value, including empty, hides it |
+| `VISIO_APP_VISIBLE` | Visible | `1`, `true`, `yes`, `on` enable visibility/repainting, case-insensitive and without trimming. Any other explicit value, including empty or surrounding whitespace, hides it |
 {: .settings-table }
 
 Hidden doesn't mean headless: an interactive Windows session, installed
@@ -25,7 +25,16 @@ drawing, or let [manage_document open](../tools/MANAGE_DOCUMENT.md) start
 Visio when opening an intended existing drawing. Other tools don't start
 it implicitly. No environment setting saves a drawing automatically.
 
-### Index freshness
+## Session mode
+
+| Variable | Default | Accepted values and effect |
+| --- | --- | --- |
+| `VISIO_MCP_SESSION_TYPE` | `interactive` | Trimmed, case-insensitive `interactive` or `eval` labels the session in operational diagnostics. Unset/blank uses `interactive`; other values become `unknown`. `eval` also requires a newly launched, verified Visio instance |
+{: .settings-table }
+
+Leave this unset for normal client use. `eval` is for controlled evaluation, not a startup troubleshooting switch: it rejects a shared or unverifiable Visio instance with `VISIO_NOT_AVAILABLE` before changing its display, add-on, or document state. It doesn't terminate other Visio sessions or guarantee that no other Visio processes are running. Changing session type doesn't override Office diagnostic-data permissions.
+
+## Index freshness
 
 The first eligible tool call in a session refreshes the stencil index in the
 background if the saved index is more than 15 minutes old. This built-in

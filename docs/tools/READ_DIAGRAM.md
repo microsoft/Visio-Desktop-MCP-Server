@@ -52,6 +52,12 @@ spatial overlap is association evidence, **not a visual-defect finding**.
 Only returned `containerMemberships` establishes native container membership;
 group ancestry is separate. Don't autonomously use the user's selection.
 
+## Stable shape IDs
+
+Copying shapes in Visio can duplicate their stored IDs. When such copies are detected, reads return distinct page/shape-qualified IDs without changing the drawing or discarding copies. Unrelated unique IDs stay unchanged, and relationship and parent references use the same returned IDs. Use those exact IDs for follow-up reads and edits; the original duplicated ID remains ambiguous. Deleting another copy doesn't by itself invalidate the surviving shape's previously returned qualified ID.
+
+A read limited to selected pages or shapes may not discover a copy outside that scope. Don't infer document-wide ID uniqueness from a narrowed read. Unresolved identity collisions still return `DUPLICATE_ID`.
+
 ## Examples
 
 ```json
@@ -92,9 +98,11 @@ and warnings. `availability` identifies affected `pageId`, `shapeId`, and
 aren't proven nonmatches, so don't treat the result as exhaustive.
 This evidence survives detail materialization and artifact/chunk retrieval.
 
+If `availabilityComplete:false` is returned, the full `availability` list isn't inline. Retrieve the exact issued `availabilityArtifactPath` using the [artifact protocol](#large-results-and-artifacts), starting at `chunkOffset:0` unless that artifact already has a returned batch. The path can be the same as `output.artifactPath`; in that case, finish consuming its existing chunks rather than starting a separate retrieval. Missing inline diagnostics don't mean every field was available.
+
 Partial/unavailable features expose `features.<name>.missingValues:"NA"`.
 Available values remain intact; missing typed values remain null, not the
-string `"NA"`. Invalid selectors, duplicate logical IDs, and detected
+string `"NA"`. Invalid selectors, unresolved identity collisions, and detected
 document changes still produce errors.
 
 Deterministic output includes `output.breakdown.text`; JSON graph output
@@ -106,6 +114,8 @@ also embeds `textCounts`:
 | `resolvedTextShapes` | Nonempty resolved display text or literal text without fields; empty evaluated fields don't count |
 | `fieldTextShapes` | Shapes with text-field evidence or field placeholders |
 | `unresolvedFieldShapes` | Field-bearing shapes without complete field resolution |
+
+If `output.breakdownComplete:false` is returned, the shape-kind, master-usage, and Shape Data field breakdown maps are omitted from the response. Empty maps then mean omitted detail, not zero occurrences. Fixed totals, including text counts, remain available, and the persisted diagram artifact isn't truncated by this omission.
 
 `labels`/`labelCount` use raw text records, not visible-label counts or counts
 of shapes with their own instance XML text. When unresolved fields remain,

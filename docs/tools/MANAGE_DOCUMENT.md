@@ -60,6 +60,8 @@ AutoSize mode unless `widthIn` or `heightIn` is supplied. Explicit dimensions
 disable AutoSize by default; with `autoSize:true`, the dimensions apply first,
 then AutoSize is enabled. An orientation-only change preserves AutoSize.
 
+Page selectors accept page names/NameU or 1-based index strings. Numeric strings take index precedence: `"2"` selects the second page, not a page named `"2"` elsewhere. Use that page's current index or a nonnumeric name when the name could be confused with an index.
+
 ## Lifecycle examples
 
 These are separate calls. Replace `<diagramId>` with the create/open result:
@@ -87,6 +89,10 @@ Omitting the destination saves back to the retained file, or generates a path
 for an unsaved drawing. Same-path saves update that file. A different existing
 destination requires overwrite; replacing another retained destination rejects.
 Use the returned `filePath`, not a guessed destination.
+
+### Saving after Visio Save As
+
+If you rename the retained drawing using **Save As** in Visio, opening its old or new path, or saving without an explicit destination, can return `CONFLICT` rather than use a stale path. Save with the same `diagramId`, the drawing's current native path as `outputPath`, and `options.overwrite:true` after authorizing that save. A successful save updates the retained path and preserves the ID. Don't retry the old path or create a replacement drawing.
 
 ## Page and export examples
 

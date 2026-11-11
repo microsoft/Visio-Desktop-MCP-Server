@@ -13,11 +13,12 @@ retained drawing IDs belong to the previous session.
 
 | Reference | Contents |
 | --- | --- |
-| [Runtime and discovery](configuration/RUNTIME.md) | Output root, visibility, index refresh, custom-content locations |
+| [Runtime and discovery](configuration/RUNTIME.md) | Output root, visibility, session mode, index refresh, custom-content locations |
 | [Logging and diagnostics](configuration/LOGGING.md) | File logging, log rollover, locations, telemetry distinction |
 
-The server reads three user-facing settings: `VISIO_MCP_ROOT`,
-`VISIO_APP_VISIBLE`, and `VISIO_MCP_LOCAL_LOG_ENABLED`. Other `VISIO_MCP_*` variables
+The server reads four runtime settings: `VISIO_MCP_ROOT`, `VISIO_APP_VISIBLE`, `VISIO_MCP_LOCAL_LOG_ENABLED`, and `VISIO_MCP_SESSION_TYPE`. Leave session type unset for normal interactive use; see [session mode](configuration/RUNTIME.md#session-mode) before changing it.
+
+Other `VISIO_MCP_*` variables
 from earlier previews, such as log level, log retention, locale, caching, and
 index refresh overrides, are ignored; remove them from your configuration.
 

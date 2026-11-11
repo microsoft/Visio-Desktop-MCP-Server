@@ -71,8 +71,9 @@ Also expect these preview limitations:
   use a modern-format copy. See [Discover and bind masters](CUSTOM_CONTENT.md#discover-and-bind-masters).
 - **Saving:** changes are saved only when the agent saves the drawing, so ask
   it to save and check the reported path before closing. You don't need to
-  save it yourself in Visio. Exporting doesn't save the drawing, closing discards
-  unsaved changes, and an export can replace an earlier export with the same
+  save it yourself in Visio. Exporting doesn't save the drawing. Closing leaves
+  unsaved drawings open and requests confirmation; discarding changes requires
+  explicit approval. An export can replace an earlier export with the same
   name. Don't edit the same diagram yourself,
   open another copy of it, or let more than one agent work on it at the same
   time. See [Manage pages and save](WORK_WITH_DIAGRAMS.md#manage-pages-and-save).

@@ -49,12 +49,18 @@ Create connections require `source`/`target`; `ID` is optional and generated
 when omitted. Update `addEdge` requires a new `ID` too. Optional writable fields:
 `Text`, `Formatting`, `ShapeData`, `Hyperlinks`.
 `updateEdge.patch` accepts those plus `source`/`target`.
+Use `"Text":""` to clear a connector label; omitted/null text leaves it
+unchanged. Empty/all-null edge patches reject, while null fields may
+accompany at least one non-null change.
 Connector `NameU`, `Layers`, `glueStatus`, and native identity evidence aren't
 connection-write fields.
 
 Each create containment needs `ID`, `parent` (native container ID), and `child`
 (member ID). `position` requests a zero-based native-list slot.
-Placement/group ancestry alone isn't native membership.
+Placement/group ancestry alone isn't native membership. Ordered list items
+must meet native category rules; ordinary contained shapes have membership
+without an ordered slot. For ordinary contained nodes, supplying `position`
+doesn't skip attachment or convert them into list items.
 
 ## Formatting
 

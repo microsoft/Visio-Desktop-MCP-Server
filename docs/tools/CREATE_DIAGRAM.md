@@ -19,6 +19,12 @@ or page, save edits, or export. Use [manage_document](MANAGE_DOCUMENT.md) for th
 | `page` | Nonblank string | Yes | Existing page name/NameU or 1-based index string |
 | `options` | Object | No | Page-authoring settings below |
 
+Schema discovery includes `toolInputs.create_diagram` with the complete outer
+contract and encoded-call examples. Unknown top-level arguments reject;
+unknown option and nested payload properties are ignored, not authored.
+Explicit page/lifecycle/theme overrides remain errors. See
+[input validation](GET_VISUAL_MODEL_SCHEMA.md#input-validation).
+
 ## Options
 
 | Field | Default | Behavior |
@@ -32,6 +38,9 @@ or page, save edits, or export. Use [manage_document](MANAGE_DOCUMENT.md) for th
 | `returnFields` | Omitted | String array selecting heavy `actions`, `shapeIdMap`, `ok_ids`, or `all` fields |
 
 Boolean fields require booleans. Layout/detail/kind fields are strings.
+`validationDetail` is trimmed and case-insensitive; null/blank means `summary`.
+`diagramKind` is an extensible hint: unknown strings retain generic authoring
+behavior, not a new template or specialized workflow.
 Use canonical layout values: layout overrides supplied coordinates and
 reroutes connectors. Leave it off for deliberately positioned containers/
 swimlanes. A no-coordinates fallback can still place multiple unpositioned nodes.
@@ -77,7 +86,12 @@ New node/connector IDs must not collide with existing document IDs.
 Use the [payload reference](VISUAL_MODEL.md) for exact shape/data/style fields.
 Use real `Relationships.Connects`, not proximity, for connections.
 Use a native container master and `Relationships.Contains` for actual membership.
-Native list slots use zero-based `position`.
+Native list slots use zero-based `position`. Ordered native list membership
+and ordinary containment are distinct: a shape can be contained without
+being an ordered list item. Eligible list items have native membership and
+order verified before success is reported. For ordinary contained nodes,
+supplying `position` doesn't skip attachment or turn the node into an
+ordered list item.
 
 For swimlanes, supply lane/member geometry in the initial create, size lanes
 to their content, and use `diagramKind="swimlane"`. Don't simulate membership

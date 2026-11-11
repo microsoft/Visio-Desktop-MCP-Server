@@ -19,8 +19,11 @@ mean **unset**, not necessarily your current machine's values.
 {: .settings-table }
 
 Hidden doesn't mean headless: an interactive Windows session, installed
-Visio, and explicit [manage_visio open](../tools/MANAGE_VISIO.md) are still
-required. No environment setting saves a drawing automatically.
+Visio, and an open application are still required for desktop operations.
+Use [manage_visio open](../tools/MANAGE_VISIO.md) before creating a new
+drawing, or let [manage_document open](../tools/MANAGE_DOCUMENT.md) start
+Visio when opening an intended existing drawing. Other tools don't start
+it implicitly. No environment setting saves a drawing automatically.
 
 ### Index freshness
 

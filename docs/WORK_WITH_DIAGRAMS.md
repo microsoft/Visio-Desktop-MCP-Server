@@ -31,6 +31,13 @@ before authoring.
 > page, list the servers, their Shape Data, network zones, and connections.
 > Report missing fields as unknown.
 
+The agent must first retain the intended existing drawing with
+`manage_document action="open"` and use its returned `diagramId` for reads.
+`filePath` only selects an already-retained saved drawing; reading never
+opens or reopens it. Don't create a replacement drawing to read an existing
+file. Retrieval of an issued read artifact doesn't require the drawing or
+Visio to remain open.
+
 Read results can include shapes, text, relationships, and native container or
 swimlane membership. Request nested content when needed; the default read scope
 is top-level shapes. For large results, the agent must
@@ -61,9 +68,14 @@ foreground pages, not only the edited page.
 | Save a new copy | Uses another destination; replacing an existing destination requires explicit overwrite. |
 | Leave unsaved | Keeps live edits available for review in the current session. |
 
-Keep backups and avoid concurrent edits. Closing a drawing through the server
-**discards unsaved changes**; restarting loses session-scoped document identities.
-An error can follow partial changes, so inspect the drawing before retrying.
+Keep backups and avoid concurrent edits. If a drawing has unsaved changes,
+`close` does not close or save it: it returns `closed:false`,
+`requiresConfirmation:true`, and warnings. Save first to keep the changes,
+or use `options.discardUnsavedChanges:true` only after user approval to close
+and discard them. Already-saved drawings close normally. See
+[document close](tools/MANAGE_DOCUMENT.md#side-effects).
+Restarting loses session-scoped document identities. An error can follow
+partial changes, so inspect the drawing before retrying.
 
 **Related:** [Validate and export](VALIDATE_AND_EXPORT.md) |
 [Tool reference](TOOLS.md) | [Troubleshooting](TROUBLESHOOTING.md).

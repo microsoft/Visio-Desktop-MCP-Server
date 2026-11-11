@@ -6,8 +6,9 @@ permalink: /tools/get-visual-model-schema/
 ---
 # get_visual_model_schema
 
-Return the canonical JSON Schema for the nested Visual Model and ordered
-update-operation array. No Visio connection or document is needed.
+Return the canonical JSON Schema for the nested Visual Model, ordered
+update-operation array, and outer create/update arguments.
+No Visio connection or document is needed.
 
 ## Arguments and example
 
@@ -30,6 +31,30 @@ The root requires `SchemaVersion`, `Shapes`, and `Relationships`.
 `SchemaVersion` is exactly `"1.0"`. Shape identity requires `ID` and `NameU`.
 The [payload reference](VISUAL_MODEL.md) explains writable fields versus
 read-side observations and units.
+
+`toolInputs.create_diagram` and `toolInputs.update_diagram` contain complete
+outer argument and option schemas, plus full-call `examples` with the nested
+payloads already encoded as strings. These supplement the nested contracts;
+they don't replace them.
+
+## Input validation
+
+Create/update reject unknown top-level arguments. Unknown properties inside
+their `options`, Visual Model objects, and operation objects are ignored;
+they don't become authored changes. Use canonical fields rather than relying
+on ignored properties, and read back to verify the result.
+Freeform extension maps remain passthrough data.
+
+Explicit document/page management, lifecycle, export, and document-wide theme
+overrides remain prohibited in authoring payloads/options. Unsupported
+operation names still reject; a patch with only ignored fields is empty and
+rejects. Each `updateEdge.patch` needs at least one non-null change, although
+null fields may accompany a real change.
+
+Invalid enum values identify the property, rejected value, and allowed
+values. Type errors identify the property path and expected/actual JSON
+types. This tolerance applies only to create/update; `read_diagram` retains
+its strict argument contract and has no `options` object.
 
 ## Use it correctly
 

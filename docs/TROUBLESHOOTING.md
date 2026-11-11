@@ -5,8 +5,11 @@ permalink: /troubleshooting/
 ---
 # Troubleshooting
 
-**Protect unsaved work first.** Closing a drawing through the server discards
-unsaved edits. Don't close/reopen Visio or restart the server as a generic
+**Protect unsaved work first.** If a drawing has unsaved changes, `close`
+does not close or save it: it returns `closed:false`,
+`requiresConfirmation:true`, and warnings. Save first to keep the changes,
+or use `options.discardUnsavedChanges:true` only after user approval to close
+and discard them. Don't close/reopen Visio or restart the server as a generic
 response to a failed tool call.
 
 ## Connection and startup
@@ -24,12 +27,32 @@ response to a failed tool call.
 | Symptom | Check |
 | --- | --- |
 | Operation stalls | Inspect Visio for sign-in, recovery, or modal prompts and resolve them yourself. Check actual drawing state before retrying. |
-| `COM_OPEN_CONFLICT` | Read the error's path/details; another Visio instance may hold a conflicting copy. Save work before closing anything. Reuse an already-retained drawing. |
+| `COM_OPEN_CONFLICT` | Read the error's path/details and [document-open evidence](#document-open-failures). A generic conflict or already-open drawing isn't proof of a lock. Reuse an already-retained drawing; save work before closing anything. |
 | Access denied | Check client approval and Windows permissions; the output root isn't a filesystem sandbox. |
 | `FILE_ALREADY_EXISTS` | Choose a new destination or explicitly authorize overwrite. [Save and export defaults differ](WORK_WITH_DIAGRAMS.md#manage-pages-and-save). |
 | Changes absent from disk | Ask for an explicit save and confirm its returned path. An export doesn't save the source. |
 | Save error names a staged recovery file | Preserve that file. Open the exact reported recovery path, inspect it, and save to an available destination; don't recreate or delete it blindly. |
-| Retained ID no longer works | IDs belong to the server session. After external closure or restart, explicitly open Visio and the saved file again; unsaved state isn't automatically recovered. |
+| Retained ID no longer works | IDs belong to the server session. After external closure or restart, explicitly open Visio, reopen the intended existing file with `manage_document action="open"`, and use its newly returned `diagramId`. Don't create a replacement drawing to recover an existing-document task. Unsaved state isn't automatically recovered; if the intended file is unknown or was never saved, report that rather than guessing. |
+
+## Document-open failures
+
+Failed native opens can report the requested read-only, macro-disabled, and
+no-workspace flags, plus whether a matching document was observed in the
+current Visio instance and whether that document was read-only.
+These are limited, best-effort observations after the failure, not a scan of
+every Visio process. Unavailable matching-document observations may be
+omitted; omission doesn't mean false.
+
+`openNativeFailure` classifies explicit native sharing, lock, or access-denied
+errors as `SharingViolation`, `LockViolation`, or `AccessDenied`. Other native
+failures remain `Unknown`. Neither `documentAlreadyOpen:true` nor a generic
+conflict proves that another document caused the failure or holds a file lock.
+
+Diagnostic collection doesn't retry the open, probe write access, recover,
+save, or close anything. Inspect the intended drawing and available evidence
+before deciding what to do; don't discard work or create a replacement
+drawing just to clear an open error. Tool error details can still contain
+paths and native error text; review them before sharing.
 
 ## Drawing results
 

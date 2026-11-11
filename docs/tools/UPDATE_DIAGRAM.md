@@ -19,6 +19,12 @@ returned stable shape/connector IDs. Never substitute labels, guesses,
 | `operations` | JSON-encoded **array string**, not an array argument | Yes |
 | `options` | Object | No |
 
+Schema discovery includes `toolInputs.update_diagram` with the complete outer
+contract and encoded-call examples. Unknown top-level arguments reject;
+unknown option and nested payload properties are ignored. They can't
+bypass page/lifecycle/theme prohibitions or turn an empty patch into a
+change. See [input validation](GET_VISUAL_MODEL_SCHEMA.md#input-validation).
+
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `atomic` | `false` | Abort on failure and attempt batch rollback; inspect errors/state |
@@ -57,8 +63,20 @@ Every object needs `op`; other required fields are below.
 Callout `preferredSide`: `auto`, `left`, `right`, `above`, `below`.
 `clearance`: 0-2 inches, default 0.2.
 Container `padding`: 0-2 inches, default 0.25.
-`heading` requires a master with a visible heading; otherwise set `Text`.
+`heading` requires a master with a visible heading, including visible text on
+native group children in page coordinates. Hidden or transparent text doesn't
+satisfy verification; otherwise omit `heading` and set `Text`.
 Layer fields and all supported patches are in the [payload reference](VISUAL_MODEL.md).
+
+To clear a connector label, use an `updateEdge` patch with `"Text":""`.
+Omitted/null text leaves the label unchanged. Every edge patch needs at
+least one non-null change; empty/all-null patches reject. Null fields may
+accompany another non-null change. For example, JSON-encode this operation
+array into `operations`:
+
+```json
+[{"op":"updateEdge","id":"<connectorId>","patch":{"Text":""}}]
+```
 
 ## Example: targeted label and data edit
 
@@ -80,8 +98,13 @@ A new ID can be referenced only after an earlier operation creates it.
 `updateEdge` for an existing connector, or delete it before recreating it.
 
 For native-list additions, put `addToContainer` immediately after `addNode`,
-then an exact-slot `reorderContainerMember` if needed. Don't use `fitContainer`
-to size swimlane/phase lists.
+then an exact-slot `reorderContainerMember` if needed for an eligible ordered
+list item. Ordinary contained shapes don't acquire an ordered slot merely
+by joining a native list container. Moving a native CFF Swimlane List or
+Phase List uses a native container move to translate nested members while
+retaining membership and order. Direct lane/phase geometry edits remain
+guarded and can return warnings. Don't use `fitContainer` to size
+swimlane/phase lists.
 
 Use `addCallout`, not a node plus a separate connector, for an intrinsic callout
 leader. Discover `kind="callout"` and identify the exact target; nearby intent

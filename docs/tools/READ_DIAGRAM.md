@@ -6,15 +6,18 @@ permalink: /tools/read-diagram/
 ---
 # read_diagram
 
-Read diagram **content**, not visual defects. Source reads require explicitly
-opened Visio; issued-artifact retrieval doesn't. Reads don't save the drawing.
+Read diagram **content**, not visual defects. Source reads require the intended
+drawing to be retained through `manage_document` `open` or `create`.
+Reading never opens or reopens a drawing or starts Visio, even for package-first
+reads. Issued-artifact retrieval doesn't require an open drawing or Visio.
+Reads don't save the drawing.
 
 ## Source-read arguments
 
 | Argument | Type/default | Meaning |
 | --- | --- | --- |
 | `diagramId` | Nonblank string | Retained live drawing, including unsaved edits; takes precedence over `filePath` |
-| `filePath` | Nonblank string | Absolute drawing path when no retained ID is supplied |
+| `filePath` | Nonblank string | Absolute path selecting an already-retained saved drawing when no retained ID is supplied; doesn't open it |
 | `target` | Required object | One target variant below |
 | `scope` | String: `topLevel` | `semantic` keeps data-bearing master instances atomic; `allDepth` includes reachable subshapes |
 | `includeFormatting` | Boolean: `false` | Full shape formatting |
@@ -22,6 +25,12 @@ opened Visio; issued-artifact retrieval doesn't. Reads don't save the drawing.
 | `includeHyperlinks` | Boolean: `false` | Hyperlink evidence |
 | `includeLayers` | Boolean: `false` | Page layer definitions and memberships |
 | `outputPath` | Optional string | Exact `.json` filename, not a directory; requests an artifact destination |
+
+Before reading an existing file, open it with
+[manage_document](MANAGE_DOCUMENT.md) `action="open"` and reuse its returned
+`diagramId`. Use `action="create"` only when a new drawing is intended, not
+to recover an existing-document task. `filePath` is an alternative selector
+for an already-retained saved drawing, not an open request.
 
 At least one document selector is required. Omit unused arguments rather
 than sending null read selectors/flags. Presentation/spatial opt-ins may
@@ -70,7 +79,39 @@ Don't restart at zero unless intentionally retrying the initial batch.
 Only the latest 64 issued artifact paths are retained for this server session.
 Unknown, evicted, deleted, or byte/hash-modified artifacts fail; reread the
 document rather than mixing snapshots. This isn't an arbitrary-file reader.
-Retrieval neither rereads Visio nor saves it.
+Retrieval neither rereads Visio nor saves it and remains available after
+the drawing or application closes, while the issued artifact remains valid
+in the same server session.
+
+## Partial evidence and text counts
+
+Missing overlap bounds don't fail the entire read. Available selected,
+contained, and proven overlap matches are returned with `complete:false`
+and warnings. `availability` identifies affected `pageId`, `shapeId`, and
+`field` (`bounds` or `overlap`) with `status:"NA"`. Unknown overlap candidates
+aren't proven nonmatches, so don't treat the result as exhaustive.
+This evidence survives detail materialization and artifact/chunk retrieval.
+
+Partial/unavailable features expose `features.<name>.missingValues:"NA"`.
+Available values remain intact; missing typed values remain null, not the
+string `"NA"`. Invalid selectors, duplicate logical IDs, and detected
+document changes still produce errors.
+
+Deterministic output includes `output.breakdown.text`; JSON graph output
+also embeds `textCounts`:
+
+| Count | Meaning |
+| --- | --- |
+| `rawTextShapes` | Non-whitespace raw text records, including inherited master text and field placeholders |
+| `resolvedTextShapes` | Nonempty resolved display text or literal text without fields; empty evaluated fields don't count |
+| `fieldTextShapes` | Shapes with text-field evidence or field placeholders |
+| `unresolvedFieldShapes` | Field-bearing shapes without complete field resolution |
+
+`labels`/`labelCount` use raw text records, not visible-label counts or counts
+of shapes with their own instance XML text. When unresolved fields remain,
+the resolved count is a lower bound. Counts don't infer whether text was
+instance-authored or inherited. Preserve raw text evidence and update backing
+Shape Data rather than replacing field-bearing labels.
 
 ## Coverage and restrictions
 

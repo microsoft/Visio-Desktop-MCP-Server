@@ -21,9 +21,26 @@ Required-tier diagnostics are permitted unless Office diagnostic data is
 fully disabled. Organizational policy can take precedence over user settings.
 Use your organization's supported Office privacy controls.
 
+Server operational logs and remote diagnostics use controlled categories,
+such as tool/action, requested operation categories, success/failure, error
+classification, execution path, and measured durations. Document-open
+diagnostics can include open flags and limited matching-document observations,
+not proof of the cause of an open failure.
+
+These diagnostics omit diagram content, names, paths, raw arguments/results,
+search terms, and exception messages/stacks. Server-generated session and
+invocation identifiers can correlate operations; content-free doesn't mean
+uncorrelated or fully anonymous. See
+[Logging and diagnostics](configuration/LOGGING.md) for local output controls.
+
 Office diagnostic settings don't control your AI client's handling of diagram
 content. Conversely, disabling local file logging doesn't disable remote
 diagnostics or stderr output.
+
+This content-free policy covers server operational diagnostics, not MCP tool
+responses, AI-client conversations, or separately captured evaluation/session
+artifacts. Those can contain drawing content, paths, or native error details
+and still require review before sharing.
 
 ## Files and approvals
 

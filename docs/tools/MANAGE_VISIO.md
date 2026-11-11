@@ -23,12 +23,14 @@ in [known Visio locations](../CUSTOM_CONTENT.md).
 | Action | Behavior | Result |
 | --- | --- | --- |
 | `open` | Explicitly start Visio before desktop operations; reuse the live instance on repeated opens | `instanceId`, `open` |
-| `close` | Close the managed application only when no retained drawings remain; never quit unrelated/user-owned processes | `instanceId`, `open`, `alreadyClosed` where applicable |
+| `close` | Check all live documents before closing saved retained drawings and quitting only the server-owned application; unsaved work blocks shutdown with a confirmation warning, not a tool error | `instanceId`, `open`, `alreadyClosed` where applicable; `open:true`, `requiresConfirmation:true`, and warnings when unsaved work blocks close |
 | `update_index` | Rescan known locations and publish the refreshed snapshot before returning | `action`, `stencilCount`, `masterCount`, `failedStencilCount`, `persisted`, `finishedUtc` |
 
 A new launch receives a new instance ID. Repeated open preserves its ID and
 retained drawings. Closing an already externally closed application is
-idempotent. Other tools don't silently restart Visio after external closure.
+idempotent. [manage_document](MANAGE_DOCUMENT.md) `action="open"` starts Visio
+if needed, including after external closure. Other document actions and
+source reads don't implicitly restart it.
 
 Refresh is package-only: it neither launches Visio nor requires a restart.
 It bypasses the [automatic refresh freshness gate](../configuration/RUNTIME.md#index-freshness).
@@ -52,8 +54,8 @@ Refresh after installing or changing approved stencil/template files:
 ```
 
 Then search the refreshed content with [content_search](CONTENT_SEARCH.md).
-Close only after explicitly saving any work to retain and closing retained
-drawings through [manage_document](MANAGE_DOCUMENT.md):
+Close only after explicitly saving any work to retain. Saved retained
+drawings are closed as part of application shutdown:
 
 ```json
 {"action": "close"}
@@ -61,9 +63,20 @@ drawings through [manage_document](MANAGE_DOCUMENT.md):
 
 ## Failure handling
 
-Application close rejects while retained drawings remain. Closing a drawing
-discards unsaved edits, so don't close drawings merely to make application
+Application close checks all live documents before closing any retained
+drawings. If that check finds unsaved work, no drawings are closed and Visio
+remains open with `open:true`, `requiresConfirmation:true`, and warnings,
+not a tool error. It does not save or discard those changes.
+Save first to keep them, or explicitly close each retained
+unsaved drawing through [manage_document](MANAGE_DOCUMENT.md#side-effects)
+with `options.discardUnsavedChanges:true` only after user approval to discard
+its edits, then retry application close. Don't discard work merely to make
 shutdown succeed. Close/reopen isn't a generic retry strategy.
+
+The server refuses to quit a shared or user-owned application. Ownership
+violations and operational failures remain tool errors. Native state changes
+or failures after the initial check can interrupt an already-started shutdown;
+inspect actual state before retrying.
 
 After external closure or server restart, open the application and saved
 drawings explicitly; old retained IDs aren't reusable and unsaved content

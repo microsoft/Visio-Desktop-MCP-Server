@@ -69,12 +69,32 @@ A read limited to selected pages or shapes doesn't establish document-wide ID un
 
 ## Large results and artifacts
 
-Consume initial `output.chunks`. While `output.nextChunkOffset` is present,
-call this tool with **only** the exact issued artifact path and returned offset:
+Consume the source read's initial `output.chunks`. If `output.nextChunkOffset` is present, call this tool with **only** the exact issued artifact path and returned offset:
 
 ```json
 {"artifactPath": "<returned artifactPath>", "chunkOffset": 4}
 ```
+
+Artifact-retrieval responses return the batch fields **at the top level**, not inside `output`:
+
+| Field | Initial source-read response | Artifact-retrieval response |
+| --- | --- | --- |
+| Chunk text | `output.chunks` | `chunks` |
+| Next batch offset | `output.nextChunkOffset` | `nextChunkOffset` |
+| Issued path | `output.artifactPath` | `artifactPath` |
+
+For example, a retrieval response can contain this excerpt; chunk text is illustrative:
+
+```json
+{
+  "artifactPath": "<returned artifactPath>",
+  "chunkOffset": 4,
+  "chunks": ["<fragment 5>", "<fragment 6>", "<fragment 7>", "<fragment 8>"],
+  "nextChunkOffset": 8
+}
+```
+
+Append these `chunks` to the earlier batch, then use the top-level `nextChunkOffset` for the next call. Stop when that field is absent or null.
 
 The `4` is illustrative: use the returned offset, not a guessed byte/shape
 offset. Each batch contains up to four UTF-8 chunks, each at most 8,000 bytes.
@@ -123,6 +143,19 @@ instance-authored or inherited. Preserve raw text evidence and update backing
 Shape Data rather than replacing field-bearing labels.
 
 ## Coverage and restrictions
+
+The initial source-read response's `output` describes the complete result, not just its first chunk batch. Artifact retrieval returns the same coverage fields at the top level:
+
+| Field under `output` | Meaning |
+| --- | --- |
+| `expectedCounts` | Records expected for the requested output and scope |
+| `emittedCounts` | Records emitted across the complete output, not just the current batch |
+| `scopeCounts` | Source record counts within the requested scope |
+| `excludedCounts` | All-depth source records excluded by that scope |
+| `scopeComplete` | Every expected record within the requested scope was emitted |
+| `complete` | The output is scope-complete and excludes no all-depth source records |
+
+These counts cover categories such as shapes, connectors, containments, labels, and group ancestries. A `topLevel` read can have `output.scopeComplete:true` and `output.complete:false` because nested records were intentionally excluded. Use `scope:"allDepth"` when nested content is required. Neither coverage flag means you have already retrieved every chunk.
 
 Check completeness, scope coverage, and warnings before inferring absence.
 Retrieving every chunk doesn't prove the original scope included every shape.

@@ -105,5 +105,13 @@ Inspect returned warnings/failures and requested heavy fields, read back to
 reconcile with the source, then explicitly save. A transport success alone
 isn't proof that every requested operation succeeded.
 
+## Results
+
+See the shared [authoring result fields](../TOOLS.md#authoring-results) for `ok`, outcome counts, failures, warnings, notes, and optional `actions`/`ok_ids`.
+
+Create additionally returns `schemaVersion`. When requested through `options.returnFields`, `shapeIdMap` maps authored `vmId` values to native `visioShapeId`, `pageId`, and `kind`; native IDs aren't substitutes for stable IDs in follow-up edits.
+
+With validation enabled, `validationSummary` includes `counts.byCode`, `counts.bySeverity`, check coverage, `findingsTotal`, `findingsReturned`, and optional `findingsOmitted`. `validationDetail:"full"` also returns `validation` with counts, coverage, and the findings array. Review skipped/unevaluated checks rather than treating zero findings as proof that everything was checked.
+
 **Related:** [Read](READ_DIAGRAM.md) | [Update](UPDATE_DIAGRAM.md) |
 [Schema](GET_VISUAL_MODEL_SCHEMA.md).

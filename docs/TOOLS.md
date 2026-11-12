@@ -57,6 +57,25 @@ Explicit document/page/lifecycle/theme prohibitions, unsupported operations,
 and nonempty-patch guards still apply. Read arguments remain strict.
 See [input validation](tools/GET_VISUAL_MODEL_SCHEMA.md#input-validation).
 
+## Authoring results
+
+Create/update return JSON with the fields below. MCP transport success alone doesn't mean the requested edits all succeeded or that the drawing was saved.
+
+| Field | Meaning |
+| --- | --- |
+| `ok` | `false` if any item failed or was skipped; warnings alone don't make it false |
+| `summary` | Outcome counts: `total`, `succeeded`, `failed`, `warned`, `skipped`; optional `byCode`/`bySubCode` count failures by error code |
+| `failures` | Failed and skipped items, with `code`, `hint`, and available identity/correction details such as `id`, `path`, zero-based `operationIndex`, `caused_by`, and `candidates` |
+| `warnings` | Structured non-fatal advisories; review them even when `ok:true` |
+| `notes` | Free-text drawing-level advisories, separate from structured warnings |
+| `diagramId`, `filePath` | Target identity and current source path; their presence doesn't confirm a save |
+| `actions` | Optional details of server-performed side effects or normalizations |
+| `ok_ids` | Optional IDs of successful items; not a replacement for the verdict, counts, or read-back verification |
+
+Empty optional detail fields can be omitted. `actions` and `ok_ids` require `options.returnFields`; create also supports `shapeIdMap`. Requesting `all` includes the supported optional fields, but doesn't manufacture empty detail. Summary counts describe reported items, not necessarily a one-to-one count of input operations or distinct shapes.
+
+Inspect failures and any partial changes before retrying. Warnings and notes can explain limitations even when no item failed. Read back the intended result, then save explicitly when authorized.
+
 ## Read results
 
 Large reads can return issued artifacts instead of a complete inline payload.

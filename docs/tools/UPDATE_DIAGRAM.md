@@ -114,5 +114,11 @@ Without atomic mode, successful edits may remain after a failure. Inspect
 `ok`, summaries, failures, warnings, and rollback outcomes before retrying.
 Don't promise a successful save or perfect rollback from transport success.
 
+## Results
+
+See the shared [authoring result fields](../TOOLS.md#authoring-results) for `ok`, outcome counts, failures, structured warnings, and free-text notes. Request `actions` and/or `ok_ids` through `options.returnFields` when those details are needed; they are omitted by default.
+
+Use a failure's zero-based `operationIndex`, when present, to locate the affected input operation. Inspect the verdict and actual drawing state even if successful IDs are returned: they don't guarantee that the rest of the batch succeeded or that changes survived a rollback. A successful update still leaves edits unsaved.
+
 **Related:** [Save explicitly](MANAGE_DOCUMENT.md) | [Create](CREATE_DIAGRAM.md) |
 [Schema](GET_VISUAL_MODEL_SCHEMA.md).

@@ -87,7 +87,7 @@ or `"255"` for no color.
 
 ## Shape Data and hyperlinks
 
-Shape Data is an array, not a key/value object:
+Use an array of named rows for Shape Data in both create and update requests:
 
 ```json
 {
@@ -95,6 +95,8 @@ Shape Data is an array, not a key/value object:
   "Hyperlinks": [{"name": "detail", "description": "Detailed design", "subAddress": "Detail"}]
 }
 ```
+
+For compatibility, `create_diagram` also accepts simple Shape Data key/value maps on shapes and connections, for example `"ShapeData":{"Owner":"Platform","Approved":true}`. Keys must be nonblank row names; values can be strings, numbers, booleans, or null, but not nested objects or arrays. Numbers and booleans become text row values. Use row arrays for labels/formulas and for every `update_diagram` request; update doesn't accept the map shorthand.
 
 Data row `name` is required. Optional `label`, `value`, and raw `formula`
 (Visio FormulaU) are writable; the label defaults to the row name.

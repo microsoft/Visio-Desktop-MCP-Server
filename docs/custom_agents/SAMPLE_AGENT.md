@@ -53,7 +53,7 @@ Structure:
 
 Workflow:
 1. Understand the request, source, operation, and what must stay unchanged.
-2. Open Visio, then create or open the target drawing and select its page.
+2. Create or open the target drawing through manage_document (which starts Visio if needed), then select its page.
 3. For existing drawings, read first and use returned stable shape IDs.
 4. Plan components, relationships, containers, and metadata; resolve masters.
 5. Make only the requested changes; preserve unrelated content.

@@ -7,15 +7,14 @@ permalink: /tools/manage-document/
 # manage_document
 
 Manage writable documents, pages, themes, explicit saves, and exports.
-Opening an existing drawing starts Visio if needed; creating a new drawing
-requires [opening Visio](MANAGE_VISIO.md) first. Other actions don't start
+Opening an existing drawing or creating a new one starts Visio if needed and reuses an already-open server-managed application. A separate [application open](MANAGE_VISIO.md) call isn't required. Other actions don't start
 it implicitly. Creation/opening returns a retained `diagramId`; save
 preserves that ID.
 
 ## Arguments by action
 
 Every call requires string `action`. All actions except `create` and `open`
-require string `diagramId`. Supply only the additional fields listed:
+require string `diagramId`. Don't supply `diagramId` to `create` or `open`; those actions return it. Supply only the additional fields listed:
 
 | Action | Additional arguments | Allowed `options` fields |
 | --- | --- | --- |
@@ -66,7 +65,7 @@ Page selectors accept page names/NameU or 1-based index strings. Numeric strings
 
 These are separate calls. Replace `<diagramId>` with the create/open result:
 
-For a new drawing, first call `manage_visio` with `{"action":"open"}`, then:
+For a new drawing, this call opens Visio if needed and returns a new `diagramId` for an unsaved drawing:
 
 ```json
 {"action": "create"}

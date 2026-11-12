@@ -13,7 +13,7 @@ Replace angle-bracket placeholders with actual returned IDs, paths, or bindings.
 | Tool | Purpose | Needs Visio open? |
 | --- | --- | --- |
 | [manage_visio](tools/MANAGE_VISIO.md) | Open/close the managed application; refresh the content index | `open` launches it; refresh doesn't |
-| [manage_document](tools/MANAGE_DOCUMENT.md) | Drawings, pages, themes, explicit saves, exports | `open` starts it if needed; other actions require it open |
+| [manage_document](tools/MANAGE_DOCUMENT.md) | Drawings, pages, themes, explicit saves, exports | `open` and `create` start it if needed; other actions require a retained drawing |
 | [create_diagram](tools/CREATE_DIAGRAM.md) | Add content to one existing page | Yes |
 | [read_diagram](tools/READ_DIAGRAM.md) | Read content or retrieve issued JSON artifacts | Source reads: already-retained drawing required; artifacts: no |
 | [update_diagram](tools/UPDATE_DIAGRAM.md) | Apply ordered, focused page edits | Yes |
@@ -32,8 +32,7 @@ Send only arguments listed in the tool schema.
 ## Calling sequence and units
 
 For an existing drawing, use `manage_document action="open"` with its intended
-file; this starts Visio if needed. For a new drawing, search for real masters,
-explicitly open Visio, then use `manage_document action="create"`.
+file; this starts Visio if needed. For a new drawing, search for real masters, then use `manage_document action="create"`; it also starts Visio if needed.
 Reuse the returned server-issued, session-scoped `diagramId`.
 Source reads require that retained drawing; `filePath` only selects an
 already-retained saved drawing and never opens or reopens it.

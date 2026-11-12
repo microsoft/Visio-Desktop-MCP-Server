@@ -19,7 +19,7 @@ response to a failed tool call.
 | `dnx` not found | Install the SDK, not only the runtime, from [setup](SETUP.md). Reopen the client/terminal; check `dotnet --list-sdks` and `dnx --help`. |
 | Package source unavailable | Check the configured NuGet sources, package availability, network, and approved proxy settings. Don't disable certificate/security checks or copy a private feed from an old guide. |
 | Tools missing | Confirm the server is enabled in the active client/session. In VS Code, use **MCP: List Servers** and inspect its output and tool selection. |
-| Visio not open | Ask the agent to use `manage_visio action="open"` before desktop operations; tool discovery alone doesn't launch it. |
+| Visio not open | Open the intended existing drawing or create a requested new one through `manage_document`; either starts Visio if needed. `manage_visio action="open"` can also start the application explicitly. Tool discovery alone doesn't launch it. |
 | Slow first request | Package download, desktop startup, and local discovery are separate stages. Inspect output/logs to locate the delay. |
 
 ## Files and sessions
@@ -32,7 +32,7 @@ response to a failed tool call.
 | `FILE_ALREADY_EXISTS` | Choose a new destination or explicitly authorize overwrite. [Save and export defaults differ](WORK_WITH_DIAGRAMS.md#manage-pages-and-save). |
 | Changes absent from disk | Ask for an explicit save and confirm its returned path. An export doesn't save the source. |
 | Save error names a staged recovery file | Preserve that file. Open the exact reported recovery path, inspect it, and save to an available destination; don't recreate or delete it blindly. |
-| Retained ID no longer works | IDs belong to the server session. After external closure or restart, explicitly open Visio, reopen the intended existing file with `manage_document action="open"`, and use its newly returned `diagramId`. Don't create a replacement drawing to recover an existing-document task. Unsaved state isn't automatically recovered; if the intended file is unknown or was never saved, report that rather than guessing. |
+| Retained ID no longer works | IDs belong to the server session. After external closure or restart, reopen the intended existing file with `manage_document action="open"` (which starts Visio if needed) and use its newly returned `diagramId`. Don't create a replacement drawing to recover an existing-document task. Unsaved state isn't automatically recovered; if the intended file is unknown or was never saved, report that rather than guessing. |
 
 ## Document-open failures
 

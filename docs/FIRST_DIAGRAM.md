@@ -23,7 +23,7 @@ Approve intended tool actions, then inspect the drawing in Visio. Expect
 Select a shape and inspect its label; move it to check that connectors remain
 attached. The result should be editable shapes, not a flattened picture.
 
-The agent must explicitly open Visio and save the drawing. Connecting the
+Creating the drawing starts Visio if needed; a separate application-open call isn't required. The agent must explicitly save the drawing. Connecting the
 server, creating content, or editing it doesn't automatically save a file.
 Use the successful save's reported path; see [output locations](CONFIGURATION.md#output-location)
 if you need a different default.

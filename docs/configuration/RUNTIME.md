@@ -20,9 +20,7 @@ mean **unset**, not necessarily your current machine's values.
 
 Hidden doesn't mean headless: an interactive Windows session, installed
 Visio, and an open application are still required for desktop operations.
-Use [manage_visio open](../tools/MANAGE_VISIO.md) before creating a new
-drawing, or let [manage_document open](../tools/MANAGE_DOCUMENT.md) start
-Visio when opening an intended existing drawing. Other tools don't start
+Use [manage_document open or create](../tools/MANAGE_DOCUMENT.md) to start Visio if needed when opening an intended existing drawing or creating a new one. A separate [manage_visio open](../tools/MANAGE_VISIO.md) call is optional. Other tools don't start
 it implicitly. No environment setting saves a drawing automatically.
 
 ## Index freshness

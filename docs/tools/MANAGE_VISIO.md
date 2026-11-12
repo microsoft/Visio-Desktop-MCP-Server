@@ -28,7 +28,7 @@ in [known Visio locations](../CUSTOM_CONTENT.md).
 
 A new launch receives a new instance ID. Repeated open preserves its ID and
 retained drawings. Closing an already externally closed application is
-idempotent. [manage_document](MANAGE_DOCUMENT.md) `action="open"` starts Visio
+idempotent. [manage_document](MANAGE_DOCUMENT.md) `action="open"` or `action="create"` starts Visio
 if needed, including after external closure. Other document actions and
 source reads don't implicitly restart it.
 
@@ -77,8 +77,7 @@ violations and operational failures remain tool errors. Native state changes
 or failures after the initial check can interrupt an already-started shutdown;
 inspect actual state before retrying.
 
-After external closure or server restart, open the application and saved
-drawings explicitly; old retained IDs aren't reusable and unsaved content
+After external closure or server restart, reopen the intended saved drawing through `manage_document action="open"`; it starts Visio if needed. Old retained IDs aren't reusable and unsaved content
 isn't automatically recovered.
 
 **Related:** [Tool overview](../TOOLS.md) | [Troubleshooting](../TROUBLESHOOTING.md).

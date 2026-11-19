@@ -10,17 +10,25 @@ Read-only visual-quality checks after authoring or on an explicit validation
 request. This doesn't repair content or prove source/business correctness.
 For ordinary reading and inventory, use [read_diagram](READ_DIAGRAM.md).
 
+First open the intended existing drawing with
+[manage_document](MANAGE_DOCUMENT.md) `action="open"`, or use `action="create"`
+only when a new drawing is requested, then pass the returned `diagramId`.
+Validation uses the retained drawing's live state, including unsaved edits.
+It never starts Visio, opens/reopens a drawing, saves, or closes it.
+
 ## Arguments
 
 | Argument | Type/default | Meaning |
 | --- | --- | --- |
-| `diagramId` | Optional string | Retained live drawing, including unsaved edits; takes precedence over file path |
-| `filePath` | Optional string | Absolute drawing path when no retained ID is supplied |
+| `diagramId` | Required nonblank string | Retained live drawing returned by document open/create |
 | `options` | Optional object | Scope settings below |
 | `codes` | Optional string | Comma-separated finding codes; filters detail, not global counts |
 | `offset` | Nonnegative integer; `0` | Position in matched detail sequence; follow returned `nextOffset` |
 
-At least one document selector is required; Visio must be explicitly open.
+Opening Visio alone isn't sufficient: the intended
+drawing must also be retained through document open/create. After document
+closure, application loss, or server restart, reopen the intended existing
+file and use its returned `diagramId`; don't create a replacement drawing.
 
 | `options` field | Default | Behavior |
 | --- | --- | --- |

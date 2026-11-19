@@ -33,10 +33,9 @@ before authoring.
 
 The agent must first retain the intended existing drawing with
 `manage_document action="open"` and use its returned `diagramId` for reads.
-`filePath` only selects an already-retained saved drawing; reading never
-opens or reopens it. Don't create a replacement drawing to read an existing
-file. Retrieval of an issued read artifact doesn't require the drawing or
-Visio to remain open.
+Reading never opens or reopens the drawing. Don't create a replacement
+drawing to read an existing file. Retrieval of an issued read artifact doesn't
+require the drawing or Visio to remain open.
 
 Read results can include shapes, text, relationships, and native container or
 swimlane membership. Request nested content when needed; the default read scope

@@ -15,6 +15,11 @@ business correctness.
 > shape IDs and findings. Make focused repairs without changing the process,
 > validate again, and describe anything unresolved. Save after review.
 
+Use the retained `diagramId` returned by `manage_document` open/create.
+For an existing file, open that intended drawing first; validation doesn't
+start Visio or open/reopen drawings. It checks live state,
+including unsaved edits, without saving or closing the drawing.
+
 `validate_diagram` reports these eight finding categories:
 
 | Code | Checks for |

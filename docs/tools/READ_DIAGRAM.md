@@ -16,8 +16,7 @@ Reads don't save the drawing.
 
 | Argument | Type/default | Meaning |
 | --- | --- | --- |
-| `diagramId` | Nonblank string | Retained live drawing, including unsaved edits; takes precedence over `filePath` |
-| `filePath` | Nonblank string | Absolute path selecting an already-retained saved drawing when no retained ID is supplied; doesn't open it |
+| `diagramId` | Required nonblank string | Retained live drawing returned by document open/create, including unsaved edits |
 | `target` | Required object | One target variant below |
 | `scope` | String: `topLevel` | `semantic` keeps data-bearing master instances atomic; `allDepth` includes reachable subshapes |
 | `includeFormatting` | Boolean: `false` | Full shape formatting |
@@ -31,10 +30,13 @@ If `outputPath` names an existing JSON file, that file is replaced. This tool ha
 Before reading an existing file, open it with
 [manage_document](MANAGE_DOCUMENT.md) `action="open"` and reuse its returned
 `diagramId`. Use `action="create"` only when a new drawing is intended, not
-to recover an existing-document task. `filePath` is an alternative selector
-for an already-retained saved drawing, not an open request.
+to recover an existing-document task.
 
-At least one document selector is required. Omit unused arguments rather than sending null read selectors or flags. Reads include unsaved edits; don't save the drawing solely to read it.
+Source reads require both `diagramId` and `target`. Omit unused arguments rather than sending null read selectors or flags. Reads include unsaved edits; don't save the drawing solely to read it.
+
+After document closure, application loss, or server restart, explicitly reopen
+the intended existing file and use its returned `diagramId`; old IDs aren't
+reusable. Artifact retrieval remains independent of that document lifecycle.
 
 ## Targets
 

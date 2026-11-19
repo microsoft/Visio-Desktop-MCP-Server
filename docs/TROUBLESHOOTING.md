@@ -67,11 +67,21 @@ paths and native error text; review them before sharing.
 
 ## Add-ins and macros don't run
 
-MCP automation turns off Visio's **Enable Automation Events** setting. Add-ins, macros, and some built-in drawing features may not run or update the diagram as they do during manual editing.
+MCP automation suppresses Visio events. Add-ins, macros, and some built-in
+drawing features may not run or update the diagram as they do during manual
+editing.
 
-The setting applies to the whole Visio instance, not one document: it stays
-off after an MCP call, and closing a drawing doesn't reset it. To turn events
-back on after you finish MCP work:
+When Visio supports the session-only automation API, suppression doesn't
+change the saved **Enable Automation Events** preference. Older builds or
+unavailable automation interfaces fall back to the application setting,
+which can persist in your profile. Local startup logs identify whether the
+server used session-only or legacy event configuration.
+
+Suppression applies to the Visio instance, not one drawing; closing a drawing
+doesn't reset it. After MCP work, stop the server and close/relaunch Visio to
+end session-only suppression, saving any work you intend to keep first.
+Session-only suppression doesn't restore a saved event preference disabled by
+an earlier version. If the saved preference is disabled, restore it manually:
 
 1. Stop the MCP server.
 2. In Visio, go to **File > Options > Advanced**.

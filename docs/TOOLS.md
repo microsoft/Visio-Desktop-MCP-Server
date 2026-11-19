@@ -17,7 +17,7 @@ Replace angle-bracket placeholders with actual returned IDs, paths, or bindings.
 | [create_diagram](tools/CREATE_DIAGRAM.md) | Add content to one existing page | Yes |
 | [read_diagram](tools/READ_DIAGRAM.md) | Read content or retrieve issued JSON artifacts | Source reads: already-retained drawing required; artifacts: no |
 | [update_diagram](tools/UPDATE_DIAGRAM.md) | Apply ordered, focused page edits | Yes |
-| [validate_diagram](tools/VALIDATE_DIAGRAM.md) | Check supported visual defects | Yes |
+| [validate_diagram](tools/VALIDATE_DIAGRAM.md) | Check supported visual defects | Already-retained drawing required |
 | [get_visual_model_schema](tools/GET_VISUAL_MODEL_SCHEMA.md) | Retrieve outer and nested authoring schemas | No |
 | [content_search](tools/CONTENT_SEARCH.md) | Query masters, stencils, and templates | No |
 
@@ -34,8 +34,8 @@ Send only arguments listed in the tool schema.
 For an existing drawing, use `manage_document action="open"` with its intended
 file; this starts Visio if needed. For a new drawing, search for real masters, then use `manage_document action="create"`; it also starts Visio if needed.
 Reuse the returned server-issued, session-scoped `diagramId`.
-Source reads require that retained drawing; `filePath` only selects an
-already-retained saved drawing and never opens or reopens it.
+Source reads and validation require that retained `diagramId`; neither opens
+or reopens a drawing.
 Create/update requires one **existing** page; file paths aren't substitutes
 for retained IDs there. Read before editing and save explicitly when intended.
 
